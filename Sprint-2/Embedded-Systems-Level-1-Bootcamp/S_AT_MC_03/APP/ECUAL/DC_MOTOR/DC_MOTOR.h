@@ -57,6 +57,4 @@ enuErrorStatus_t DCMotor_setSpeed(uint8_t u8_Speed);
 enuErrorStatus_t DCMotor_stop(uint8_t u8_Motor);
 
 
-enuErrorStatus_t DCMotor_start(uint8_t u8_Motor);
-
 #endif /* ECUAL_DC_MOTOR_DC_MOTOR_H_ */
