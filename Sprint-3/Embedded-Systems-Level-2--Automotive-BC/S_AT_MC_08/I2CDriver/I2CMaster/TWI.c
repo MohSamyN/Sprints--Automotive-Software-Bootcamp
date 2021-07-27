@@ -112,6 +112,8 @@ enuErrorStatus_t TWI_Write(uint8_t u8Data)
 		SET_BIT(TWCR_R, TWI_INT_FLAG_BIT);
 		/* Enabling the TWI module */
 		SET_BIT(TWCR_R, TWI_EN_BIT);
+		/* Clearing the previous start condition */
+		CLEAR_BIT(TWCR_R, TWI_START_CONDITION_BIT);
 		/* Waiting for the data to be transmitted */
 		while(IS_BIT_CLEAR(TWCR_R, TWI_INT_FLAG_BIT));
 		enuRetVar = E_OK;		
@@ -184,10 +186,11 @@ enuErrorStatus_t TWI_Start(void)
 
 	if(enuTWIGroupState == TWI_INIT_DONE)
 	{
-		/* Clearing the TWI interrupt flag */
-		SET_BIT(TWCR_R, TWI_INT_FLAG_BIT);
+		//TWCR_R = (1 << TWI_INT_FLAG_BIT) | (1 << TWI_START_CONDITION_BIT) | (1 << TWI_EN_BIT);
 		/* Initiating the transmission operation by a START condition bit */
 		SET_BIT(TWCR_R, TWI_START_CONDITION_BIT);
+		/* Clearing the TWI interrupt flag */
+		SET_BIT(TWCR_R, TWI_INT_FLAG_BIT);
 		/* Enabling the TWI module */
 		SET_BIT(TWCR_R, TWI_EN_BIT);
 		/* Waiting for the start bit to be transmitted */
