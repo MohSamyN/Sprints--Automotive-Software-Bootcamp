@@ -1,0 +1,762 @@
+
+MasterMCU.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000498  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000004  00800060  00000498  0000052c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000023  00800064  00800064  00000530  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000530  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000560  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000f8  00000000  00000000  0000059c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000157b  00000000  00000000  00000694  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000806  00000000  00000000  00001c0f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000860  00000000  00000000  00002415  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000001d0  00000000  00000000  00002c78  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000acf  00000000  00000000  00002e48  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000b60  00000000  00000000  00003917  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000000b8  00000000  00000000  00004477  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e8 e9       	ldi	r30, 0x98	; 152
+  68:	f4 e0       	ldi	r31, 0x04	; 4
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a4 36       	cpi	r26, 0x64	; 100
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a4 e6       	ldi	r26, 0x64	; 100
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a7 38       	cpi	r26, 0x87	; 135
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 87 00 	call	0x10e	; 0x10e <main>
+  8a:	0c 94 4a 02 	jmp	0x494	; 0x494 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <DIO_PinInit>:
+*************************************************************************************************/
+enuErrorStatus_t DIO_PinInit(enuDIOPinNo_t enuDIOPinNo, enuDIOPinDirection_t enuDIOPinDirection, enuDIOPinPullupResistorEnable_t enuDIOPinPullupResistorEnable)
+{
+	enuErrorStatus_t enuRetVar;
+
+	if((enuDIOPinNo > DIO_PIN_NO_MIN_VALUE)													&& (enuDIOPinNo < DIO_PIN_NO_MAX_VALUE)												&&
+  92:	80 32       	cpi	r24, 0x20	; 32
+  94:	b0 f5       	brcc	.+108    	; 0x102 <DIO_PinInit+0x70>
+		(enuDIOPinDirection > DIO_PIN_DIRECTION_MIN_VALUE)									&& (enuDIOPinDirection < DIO_PIN_DIRECTION_MAX_VALUE)								&&
+  96:	62 30       	cpi	r22, 0x02	; 2
+  98:	b0 f5       	brcc	.+108    	; 0x106 <DIO_PinInit+0x74>
+		(enuDIOPinPullupResistorEnable > DIO_PIN_PULLUP_RESISTOR_ENABLE_MIN_VALUE) && (enuDIOPinPullupResistorEnable < DIO_PIN_PULLUP_RESISTOR_ENABLE_MAX_VALUE))
+  9a:	42 30       	cpi	r20, 0x02	; 2
+  9c:	b0 f5       	brcc	.+108    	; 0x10a <DIO_PinInit+0x78>
+	{
+		/* Setting the direction of data [Input / Output] */
+		ASSIGN_BIT(DDRx_R(DIO_PORT_NO(enuDIOPinNo)), DIO_PIN_NO(enuDIOPinNo), enuDIOPinDirection);
+  9e:	e8 2f       	mov	r30, r24
+  a0:	e6 95       	lsr	r30
+  a2:	e6 95       	lsr	r30
+  a4:	e6 95       	lsr	r30
+  a6:	f0 e0       	ldi	r31, 0x00	; 0
+  a8:	e0 5a       	subi	r30, 0xA0	; 160
+  aa:	ff 4f       	sbci	r31, 0xFF	; 255
+  ac:	e0 81       	ld	r30, Z
+  ae:	f0 e0       	ldi	r31, 0x00	; 0
+  b0:	df 01       	movw	r26, r30
+  b2:	5e 91       	ld	r21, -X
+  b4:	98 2f       	mov	r25, r24
+  b6:	97 70       	andi	r25, 0x07	; 7
+  b8:	21 e0       	ldi	r18, 0x01	; 1
+  ba:	30 e0       	ldi	r19, 0x00	; 0
+  bc:	09 2e       	mov	r0, r25
+  be:	02 c0       	rjmp	.+4      	; 0xc4 <DIO_PinInit+0x32>
+  c0:	22 0f       	add	r18, r18
+  c2:	33 1f       	adc	r19, r19
+  c4:	0a 94       	dec	r0
+  c6:	e2 f7       	brpl	.-8      	; 0xc0 <DIO_PinInit+0x2e>
+  c8:	20 95       	com	r18
+  ca:	70 e0       	ldi	r23, 0x00	; 0
+  cc:	09 2e       	mov	r0, r25
+  ce:	02 c0       	rjmp	.+4      	; 0xd4 <DIO_PinInit+0x42>
+  d0:	66 0f       	add	r22, r22
+  d2:	77 1f       	adc	r23, r23
+  d4:	0a 94       	dec	r0
+  d6:	e2 f7       	brpl	.-8      	; 0xd0 <DIO_PinInit+0x3e>
+  d8:	35 2f       	mov	r19, r21
+  da:	32 23       	and	r19, r18
+  dc:	63 2b       	or	r22, r19
+  de:	6c 93       	st	X, r22
+		/* Selecting whether a pull-up resistor is connected to the selected pin or not */
+		ASSIGN_BIT(PORTx_R(DIO_PORT_NO(enuDIOPinNo)), DIO_PIN_NO(enuDIOPinNo), enuDIOPinPullupResistorEnable);
+  e0:	30 81       	ld	r19, Z
+  e2:	50 e0       	ldi	r21, 0x00	; 0
+  e4:	02 c0       	rjmp	.+4      	; 0xea <DIO_PinInit+0x58>
+  e6:	44 0f       	add	r20, r20
+  e8:	55 1f       	adc	r21, r21
+  ea:	9a 95       	dec	r25
+  ec:	e2 f7       	brpl	.-8      	; 0xe6 <DIO_PinInit+0x54>
+  ee:	23 23       	and	r18, r19
+  f0:	42 2b       	or	r20, r18
+  f2:	40 83       	st	Z, r20
+		aenuDIOPinState[enuDIOPinNo] = DIO_INIT_DONE;
+  f4:	e8 2f       	mov	r30, r24
+  f6:	f0 e0       	ldi	r31, 0x00	; 0
+  f8:	ec 59       	subi	r30, 0x9C	; 156
+  fa:	ff 4f       	sbci	r31, 0xFF	; 255
+  fc:	81 e0       	ldi	r24, 0x01	; 1
+  fe:	80 83       	st	Z, r24
+		enuRetVar = E_OK;
+ 100:	08 95       	ret
+	}
+	else
+	{
+		enuRetVar = E_ERROR;
+ 102:	80 e0       	ldi	r24, 0x00	; 0
+ 104:	08 95       	ret
+ 106:	80 e0       	ldi	r24, 0x00	; 0
+ 108:	08 95       	ret
+ 10a:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	return enuRetVar;
+}
+ 10c:	08 95       	ret
+
+0000010e <main>:
+#include "UART.h"
+#include "SPI.h"
+
+
+int main(void)
+{
+ 10e:	cf 93       	push	r28
+ 110:	df 93       	push	r29
+ 112:	cd b7       	in	r28, 0x3d	; 61
+ 114:	de b7       	in	r29, 0x3e	; 62
+ 116:	cf 5f       	subi	r28, 0xFF	; 255
+ 118:	d1 09       	sbc	r29, r1
+ 11a:	0f b6       	in	r0, 0x3f	; 63
+ 11c:	f8 94       	cli
+ 11e:	de bf       	out	0x3e, r29	; 62
+ 120:	0f be       	out	0x3f, r0	; 63
+ 122:	cd bf       	out	0x3d, r28	; 61
+   uint8_t au8Data[255];
+	 
+	UART_Init(9600, UART_EIGHT_CHARACTER_BITS, UART_ONE_STOP_BIT, UART_DISABLE_PARITY);
+ 124:	00 e0       	ldi	r16, 0x00	; 0
+ 126:	20 e0       	ldi	r18, 0x00	; 0
+ 128:	43 e0       	ldi	r20, 0x03	; 3
+ 12a:	60 e8       	ldi	r22, 0x80	; 128
+ 12c:	75 e2       	ldi	r23, 0x25	; 37
+ 12e:	80 e0       	ldi	r24, 0x00	; 0
+ 130:	90 e0       	ldi	r25, 0x00	; 0
+ 132:	0e 94 5d 01 	call	0x2ba	; 0x2ba <UART_Init>
+	SPI_Init(SPI_FOSC_OVER_128, SPI_CPHA_LOW, SPI_CPOL_LOW, SPI_MASTER_MODE, SPI_MSB_TRANSMITTED_FIRST);
+ 136:	21 e0       	ldi	r18, 0x01	; 1
+ 138:	40 e0       	ldi	r20, 0x00	; 0
+ 13a:	60 e0       	ldi	r22, 0x00	; 0
+ 13c:	83 e0       	ldi	r24, 0x03	; 3
+ 13e:	0e 94 aa 00 	call	0x154	; 0x154 <SPI_Init>
+   while (1) 
+   {
+		UART_ReceiveString(au8Data);
+ 142:	ce 01       	movw	r24, r28
+ 144:	01 96       	adiw	r24, 0x01	; 1
+ 146:	0e 94 02 02 	call	0x404	; 0x404 <UART_ReceiveString>
+		SPI_SendString(au8Data);
+ 14a:	ce 01       	movw	r24, r28
+ 14c:	01 96       	adiw	r24, 0x01	; 1
+ 14e:	0e 94 3c 01 	call	0x278	; 0x278 <SPI_SendString>
+ 152:	f7 cf       	rjmp	.-18     	; 0x142 <main+0x34>
+
+00000154 <SPI_Init>:
+	else
+	{
+		enuRetVar = E_ERROR;
+	}
+	return enuRetVar;
+}
+ 154:	ff 92       	push	r15
+ 156:	0f 93       	push	r16
+ 158:	1f 93       	push	r17
+ 15a:	cf 93       	push	r28
+ 15c:	df 93       	push	r29
+ 15e:	88 30       	cpi	r24, 0x08	; 8
+ 160:	08 f0       	brcs	.+2      	; 0x164 <SPI_Init+0x10>
+ 162:	7b c0       	rjmp	.+246    	; 0x25a <SPI_Init+0x106>
+ 164:	62 30       	cpi	r22, 0x02	; 2
+ 166:	08 f0       	brcs	.+2      	; 0x16a <SPI_Init+0x16>
+ 168:	7a c0       	rjmp	.+244    	; 0x25e <SPI_Init+0x10a>
+ 16a:	42 30       	cpi	r20, 0x02	; 2
+ 16c:	08 f0       	brcs	.+2      	; 0x170 <SPI_Init+0x1c>
+ 16e:	79 c0       	rjmp	.+242    	; 0x262 <SPI_Init+0x10e>
+ 170:	22 30       	cpi	r18, 0x02	; 2
+ 172:	08 f0       	brcs	.+2      	; 0x176 <SPI_Init+0x22>
+ 174:	78 c0       	rjmp	.+240    	; 0x266 <SPI_Init+0x112>
+ 176:	02 30       	cpi	r16, 0x02	; 2
+ 178:	08 f0       	brcs	.+2      	; 0x17c <SPI_Init+0x28>
+ 17a:	77 c0       	rjmp	.+238    	; 0x26a <SPI_Init+0x116>
+ 17c:	d2 2f       	mov	r29, r18
+ 17e:	14 2f       	mov	r17, r20
+ 180:	f6 2e       	mov	r15, r22
+ 182:	c8 2f       	mov	r28, r24
+ 184:	21 11       	cpse	r18, r1
+ 186:	15 c0       	rjmp	.+42     	; 0x1b2 <SPI_Init+0x5e>
+ 188:	40 e0       	ldi	r20, 0x00	; 0
+ 18a:	60 e0       	ldi	r22, 0x00	; 0
+ 18c:	8c e0       	ldi	r24, 0x0C	; 12
+ 18e:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+ 192:	40 e0       	ldi	r20, 0x00	; 0
+ 194:	60 e0       	ldi	r22, 0x00	; 0
+ 196:	8d e0       	ldi	r24, 0x0D	; 13
+ 198:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+ 19c:	40 e0       	ldi	r20, 0x00	; 0
+ 19e:	61 e0       	ldi	r22, 0x01	; 1
+ 1a0:	8e e0       	ldi	r24, 0x0E	; 14
+ 1a2:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+ 1a6:	40 e0       	ldi	r20, 0x00	; 0
+ 1a8:	60 e0       	ldi	r22, 0x00	; 0
+ 1aa:	8f e0       	ldi	r24, 0x0F	; 15
+ 1ac:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+ 1b0:	14 c0       	rjmp	.+40     	; 0x1da <SPI_Init+0x86>
+ 1b2:	40 e0       	ldi	r20, 0x00	; 0
+ 1b4:	61 e0       	ldi	r22, 0x01	; 1
+ 1b6:	8c e0       	ldi	r24, 0x0C	; 12
+ 1b8:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+ 1bc:	40 e0       	ldi	r20, 0x00	; 0
+ 1be:	61 e0       	ldi	r22, 0x01	; 1
+ 1c0:	8d e0       	ldi	r24, 0x0D	; 13
+ 1c2:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+ 1c6:	40 e0       	ldi	r20, 0x00	; 0
+ 1c8:	60 e0       	ldi	r22, 0x00	; 0
+ 1ca:	8e e0       	ldi	r24, 0x0E	; 14
+ 1cc:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+ 1d0:	40 e0       	ldi	r20, 0x00	; 0
+ 1d2:	61 e0       	ldi	r22, 0x01	; 1
+ 1d4:	8f e0       	ldi	r24, 0x0F	; 15
+ 1d6:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+ 1da:	2d b1       	in	r18, 0x0d	; 13
+ 1dc:	30 e1       	ldi	r19, 0x10	; 16
+ 1de:	d3 9f       	mul	r29, r19
+ 1e0:	c0 01       	movw	r24, r0
+ 1e2:	11 24       	eor	r1, r1
+ 1e4:	92 2f       	mov	r25, r18
+ 1e6:	9f 7e       	andi	r25, 0xEF	; 239
+ 1e8:	89 2b       	or	r24, r25
+ 1ea:	8d b9       	out	0x0d, r24	; 13
+ 1ec:	8d b1       	in	r24, 0x0d	; 13
+ 1ee:	8c 7f       	andi	r24, 0xFC	; 252
+ 1f0:	8c 2b       	or	r24, r28
+ 1f2:	8d b9       	out	0x0d, r24	; 13
+ 1f4:	2e b1       	in	r18, 0x0e	; 14
+ 1f6:	8c 2f       	mov	r24, r28
+ 1f8:	84 70       	andi	r24, 0x04	; 4
+ 1fa:	90 e0       	ldi	r25, 0x00	; 0
+ 1fc:	95 95       	asr	r25
+ 1fe:	87 95       	ror	r24
+ 200:	95 95       	asr	r25
+ 202:	87 95       	ror	r24
+ 204:	92 2f       	mov	r25, r18
+ 206:	9e 7f       	andi	r25, 0xFE	; 254
+ 208:	89 2b       	or	r24, r25
+ 20a:	8e b9       	out	0x0e, r24	; 14
+ 20c:	2d b1       	in	r18, 0x0d	; 13
+ 20e:	8f 2d       	mov	r24, r15
+ 210:	90 e0       	ldi	r25, 0x00	; 0
+ 212:	88 0f       	add	r24, r24
+ 214:	99 1f       	adc	r25, r25
+ 216:	88 0f       	add	r24, r24
+ 218:	99 1f       	adc	r25, r25
+ 21a:	92 2f       	mov	r25, r18
+ 21c:	9b 7f       	andi	r25, 0xFB	; 251
+ 21e:	89 2b       	or	r24, r25
+ 220:	8d b9       	out	0x0d, r24	; 13
+ 222:	2d b1       	in	r18, 0x0d	; 13
+ 224:	81 2f       	mov	r24, r17
+ 226:	90 e0       	ldi	r25, 0x00	; 0
+ 228:	88 0f       	add	r24, r24
+ 22a:	99 1f       	adc	r25, r25
+ 22c:	88 0f       	add	r24, r24
+ 22e:	99 1f       	adc	r25, r25
+ 230:	88 0f       	add	r24, r24
+ 232:	99 1f       	adc	r25, r25
+ 234:	92 2f       	mov	r25, r18
+ 236:	97 7f       	andi	r25, 0xF7	; 247
+ 238:	89 2b       	or	r24, r25
+ 23a:	8d b9       	out	0x0d, r24	; 13
+ 23c:	8d b1       	in	r24, 0x0d	; 13
+ 23e:	90 e2       	ldi	r25, 0x20	; 32
+ 240:	09 9f       	mul	r16, r25
+ 242:	80 01       	movw	r16, r0
+ 244:	11 24       	eor	r1, r1
+ 246:	8f 7d       	andi	r24, 0xDF	; 223
+ 248:	08 2b       	or	r16, r24
+ 24a:	0d b9       	out	0x0d, r16	; 13
+ 24c:	8d b1       	in	r24, 0x0d	; 13
+ 24e:	80 64       	ori	r24, 0x40	; 64
+ 250:	8d b9       	out	0x0d, r24	; 13
+ 252:	81 e0       	ldi	r24, 0x01	; 1
+ 254:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <enuSPIState>
+ 258:	09 c0       	rjmp	.+18     	; 0x26c <SPI_Init+0x118>
+ 25a:	80 e0       	ldi	r24, 0x00	; 0
+ 25c:	07 c0       	rjmp	.+14     	; 0x26c <SPI_Init+0x118>
+ 25e:	80 e0       	ldi	r24, 0x00	; 0
+ 260:	05 c0       	rjmp	.+10     	; 0x26c <SPI_Init+0x118>
+ 262:	80 e0       	ldi	r24, 0x00	; 0
+ 264:	03 c0       	rjmp	.+6      	; 0x26c <SPI_Init+0x118>
+ 266:	80 e0       	ldi	r24, 0x00	; 0
+ 268:	01 c0       	rjmp	.+2      	; 0x26c <SPI_Init+0x118>
+ 26a:	80 e0       	ldi	r24, 0x00	; 0
+ 26c:	df 91       	pop	r29
+ 26e:	cf 91       	pop	r28
+ 270:	1f 91       	pop	r17
+ 272:	0f 91       	pop	r16
+ 274:	ff 90       	pop	r15
+ 276:	08 95       	ret
+
+00000278 <SPI_SendString>:
+* Parameters	: pu8Data
+* Return Value	: enuErrorStatus_t
+* Description  : Send a string to another module
+*************************************************************************************************/
+enuErrorStatus_t SPI_SendString(uint8_t* pu8Data)
+{
+ 278:	ac 01       	movw	r20, r24
+	enuErrorStatus_t enuRetVar;
+	uint8_t u8LoopIndex = 0;
+	uint8_t u8Flag = LOW;
+	
+	if(enuSPIState == SPI_INIT_DONE)
+ 27a:	80 91 84 00 	lds	r24, 0x0084	; 0x800084 <enuSPIState>
+ 27e:	81 30       	cpi	r24, 0x01	; 1
+ 280:	d1 f4       	brne	.+52     	; 0x2b6 <SPI_SendString+0x3e>
+ 282:	30 e0       	ldi	r19, 0x00	; 0
+ 284:	90 e0       	ldi	r25, 0x00	; 0
+	{
+		do
+		{
+			/* Adding the value of the data to be transmitted inside the SPI data register */
+			SPDR_R = *(pu8Data + u8LoopIndex);
+ 286:	fa 01       	movw	r30, r20
+ 288:	e9 0f       	add	r30, r25
+ 28a:	f1 1d       	adc	r31, r1
+ 28c:	80 81       	ld	r24, Z
+ 28e:	8f b9       	out	0x0f, r24	; 15
+			/* Waiting for the data until it has successfully been transmitted */
+			while(IS_BIT_CLEAR(SPSR_R, SPI_SPIF_BIT));
+ 290:	77 9b       	sbis	0x0e, 7	; 14
+ 292:	fe cf       	rjmp	.-4      	; 0x290 <SPI_SendString+0x18>
+			/* Incrementing the index of the input string */
+			u8LoopIndex++;
+ 294:	9f 5f       	subi	r25, 0xFF	; 255
+			/* Checking if the next element in the input string is \n or \r */
+			if((*(pu8Data + u8LoopIndex) == '\n') || (*(pu8Data + u8LoopIndex) == '\r'))
+ 296:	fa 01       	movw	r30, r20
+ 298:	e9 0f       	add	r30, r25
+ 29a:	f1 1d       	adc	r31, r1
+ 29c:	20 81       	ld	r18, Z
+ 29e:	2a 30       	cpi	r18, 0x0A	; 10
+ 2a0:	11 f0       	breq	.+4      	; 0x2a6 <SPI_SendString+0x2e>
+ 2a2:	2d 30       	cpi	r18, 0x0D	; 13
+ 2a4:	21 f4       	brne	.+8      	; 0x2ae <SPI_SendString+0x36>
+			{
+				/* Adding the value of the data to be transmitted inside the SPI data register */
+				SPDR_R = *(pu8Data + u8LoopIndex);
+ 2a6:	2f b9       	out	0x0f, r18	; 15
+				/* Waiting for the data until it has successfully been transmitted */
+				while(IS_BIT_CLEAR(SPSR_R, SPI_SPIF_BIT));
+ 2a8:	77 9b       	sbis	0x0e, 7	; 14
+ 2aa:	fe cf       	rjmp	.-4      	; 0x2a8 <SPI_SendString+0x30>
+				/* Raising the flag to break the loop */
+				u8Flag = HIGH;
+ 2ac:	31 e0       	ldi	r19, 0x01	; 1
+			}
+			else
+			{
+			}
+		} while(u8Flag == LOW);
+ 2ae:	33 23       	and	r19, r19
+ 2b0:	51 f3       	breq	.-44     	; 0x286 <SPI_SendString+0xe>
+		enuRetVar = E_OK;
+ 2b2:	81 e0       	ldi	r24, 0x01	; 1
+ 2b4:	08 95       	ret
+	}
+	else
+	{
+		enuRetVar = E_ERROR;
+ 2b6:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	return enuRetVar;
+}
+ 2b8:	08 95       	ret
+
+000002ba <UART_Init>:
+	else
+	{
+		enuRetVar = E_ERROR;
+	}
+	return enuRetVar;
+}
+ 2ba:	ff 92       	push	r15
+ 2bc:	0f 93       	push	r16
+ 2be:	1f 93       	push	r17
+ 2c0:	cf 93       	push	r28
+ 2c2:	df 93       	push	r29
+ 2c4:	00 d0       	rcall	.+0      	; 0x2c6 <UART_Init+0xc>
+ 2c6:	cd b7       	in	r28, 0x3d	; 61
+ 2c8:	de b7       	in	r29, 0x3e	; 62
+ 2ca:	14 2f       	mov	r17, r20
+ 2cc:	f2 2e       	mov	r15, r18
+ 2ce:	61 34       	cpi	r22, 0x41	; 65
+ 2d0:	22 e4       	ldi	r18, 0x42	; 66
+ 2d2:	72 07       	cpc	r23, r18
+ 2d4:	2f e0       	ldi	r18, 0x0F	; 15
+ 2d6:	82 07       	cpc	r24, r18
+ 2d8:	91 05       	cpc	r25, r1
+ 2da:	08 f0       	brcs	.+2      	; 0x2de <UART_Init+0x24>
+ 2dc:	7c c0       	rjmp	.+248    	; 0x3d6 <UART_Init+0x11c>
+ 2de:	48 30       	cpi	r20, 0x08	; 8
+ 2e0:	08 f0       	brcs	.+2      	; 0x2e4 <UART_Init+0x2a>
+ 2e2:	7b c0       	rjmp	.+246    	; 0x3da <UART_Init+0x120>
+ 2e4:	44 30       	cpi	r20, 0x04	; 4
+ 2e6:	09 f4       	brne	.+2      	; 0x2ea <UART_Init+0x30>
+ 2e8:	7a c0       	rjmp	.+244    	; 0x3de <UART_Init+0x124>
+ 2ea:	45 30       	cpi	r20, 0x05	; 5
+ 2ec:	09 f4       	brne	.+2      	; 0x2f0 <UART_Init+0x36>
+ 2ee:	79 c0       	rjmp	.+242    	; 0x3e2 <UART_Init+0x128>
+ 2f0:	46 30       	cpi	r20, 0x06	; 6
+ 2f2:	09 f4       	brne	.+2      	; 0x2f6 <UART_Init+0x3c>
+ 2f4:	78 c0       	rjmp	.+240    	; 0x3e6 <UART_Init+0x12c>
+ 2f6:	31 e0       	ldi	r19, 0x01	; 1
+ 2f8:	3f 15       	cp	r19, r15
+ 2fa:	08 f4       	brcc	.+2      	; 0x2fe <UART_Init+0x44>
+ 2fc:	76 c0       	rjmp	.+236    	; 0x3ea <UART_Init+0x130>
+ 2fe:	04 30       	cpi	r16, 0x04	; 4
+ 300:	08 f0       	brcs	.+2      	; 0x304 <UART_Init+0x4a>
+ 302:	75 c0       	rjmp	.+234    	; 0x3ee <UART_Init+0x134>
+ 304:	01 30       	cpi	r16, 0x01	; 1
+ 306:	09 f4       	brne	.+2      	; 0x30a <UART_Init+0x50>
+ 308:	74 c0       	rjmp	.+232    	; 0x3f2 <UART_Init+0x138>
+ 30a:	dc 01       	movw	r26, r24
+ 30c:	cb 01       	movw	r24, r22
+ 30e:	88 0f       	add	r24, r24
+ 310:	99 1f       	adc	r25, r25
+ 312:	aa 1f       	adc	r26, r26
+ 314:	bb 1f       	adc	r27, r27
+ 316:	88 0f       	add	r24, r24
+ 318:	99 1f       	adc	r25, r25
+ 31a:	aa 1f       	adc	r26, r26
+ 31c:	bb 1f       	adc	r27, r27
+ 31e:	9c 01       	movw	r18, r24
+ 320:	ad 01       	movw	r20, r26
+ 322:	22 0f       	add	r18, r18
+ 324:	33 1f       	adc	r19, r19
+ 326:	44 1f       	adc	r20, r20
+ 328:	55 1f       	adc	r21, r21
+ 32a:	22 0f       	add	r18, r18
+ 32c:	33 1f       	adc	r19, r19
+ 32e:	44 1f       	adc	r20, r20
+ 330:	55 1f       	adc	r21, r21
+ 332:	60 e0       	ldi	r22, 0x00	; 0
+ 334:	72 e1       	ldi	r23, 0x12	; 18
+ 336:	8a e7       	ldi	r24, 0x7A	; 122
+ 338:	90 e0       	ldi	r25, 0x00	; 0
+ 33a:	0e 94 28 02 	call	0x450	; 0x450 <__udivmodsi4>
+ 33e:	21 50       	subi	r18, 0x01	; 1
+ 340:	31 09       	sbc	r19, r1
+ 342:	3a 83       	std	Y+2, r19	; 0x02
+ 344:	29 83       	std	Y+1, r18	; 0x01
+ 346:	89 81       	ldd	r24, Y+1	; 0x01
+ 348:	9a 81       	ldd	r25, Y+2	; 0x02
+ 34a:	8f 3f       	cpi	r24, 0xFF	; 255
+ 34c:	91 05       	cpc	r25, r1
+ 34e:	79 f0       	breq	.+30     	; 0x36e <UART_Init+0xb4>
+ 350:	70 f0       	brcs	.+28     	; 0x36e <UART_Init+0xb4>
+ 352:	80 b5       	in	r24, 0x20	; 32
+ 354:	8f 77       	andi	r24, 0x7F	; 127
+ 356:	80 bd       	out	0x20, r24	; 32
+ 358:	80 b5       	in	r24, 0x20	; 32
+ 35a:	80 68       	ori	r24, 0x80	; 128
+ 35c:	80 bd       	out	0x20, r24	; 32
+ 35e:	80 b5       	in	r24, 0x20	; 32
+ 360:	29 81       	ldd	r18, Y+1	; 0x01
+ 362:	3a 81       	ldd	r19, Y+2	; 0x02
+ 364:	22 27       	eor	r18, r18
+ 366:	3f 70       	andi	r19, 0x0F	; 15
+ 368:	80 7f       	andi	r24, 0xF0	; 240
+ 36a:	83 2b       	or	r24, r19
+ 36c:	80 bd       	out	0x20, r24	; 32
+ 36e:	89 b1       	in	r24, 0x09	; 9
+ 370:	89 81       	ldd	r24, Y+1	; 0x01
+ 372:	9a 81       	ldd	r25, Y+2	; 0x02
+ 374:	89 b9       	out	0x09, r24	; 9
+ 376:	80 b5       	in	r24, 0x20	; 32
+ 378:	80 68       	ori	r24, 0x80	; 128
+ 37a:	80 bd       	out	0x20, r24	; 32
+ 37c:	20 b5       	in	r18, 0x20	; 32
+ 37e:	30 e1       	ldi	r19, 0x10	; 16
+ 380:	03 9f       	mul	r16, r19
+ 382:	c0 01       	movw	r24, r0
+ 384:	11 24       	eor	r1, r1
+ 386:	02 2f       	mov	r16, r18
+ 388:	0f 7c       	andi	r16, 0xCF	; 207
+ 38a:	80 2b       	or	r24, r16
+ 38c:	80 bd       	out	0x20, r24	; 32
+ 38e:	20 b5       	in	r18, 0x20	; 32
+ 390:	8f 2d       	mov	r24, r15
+ 392:	90 e0       	ldi	r25, 0x00	; 0
+ 394:	88 0f       	add	r24, r24
+ 396:	99 1f       	adc	r25, r25
+ 398:	88 0f       	add	r24, r24
+ 39a:	99 1f       	adc	r25, r25
+ 39c:	88 0f       	add	r24, r24
+ 39e:	99 1f       	adc	r25, r25
+ 3a0:	92 2f       	mov	r25, r18
+ 3a2:	97 7f       	andi	r25, 0xF7	; 247
+ 3a4:	89 2b       	or	r24, r25
+ 3a6:	80 bd       	out	0x20, r24	; 32
+ 3a8:	20 b5       	in	r18, 0x20	; 32
+ 3aa:	91 2f       	mov	r25, r17
+ 3ac:	93 70       	andi	r25, 0x03	; 3
+ 3ae:	89 2f       	mov	r24, r25
+ 3b0:	90 e0       	ldi	r25, 0x00	; 0
+ 3b2:	88 0f       	add	r24, r24
+ 3b4:	99 1f       	adc	r25, r25
+ 3b6:	92 2f       	mov	r25, r18
+ 3b8:	99 7f       	andi	r25, 0xF9	; 249
+ 3ba:	89 2b       	or	r24, r25
+ 3bc:	80 bd       	out	0x20, r24	; 32
+ 3be:	8a b1       	in	r24, 0x0a	; 10
+ 3c0:	8b 7f       	andi	r24, 0xFB	; 251
+ 3c2:	91 2f       	mov	r25, r17
+ 3c4:	94 70       	andi	r25, 0x04	; 4
+ 3c6:	89 2b       	or	r24, r25
+ 3c8:	8a b9       	out	0x0a, r24	; 10
+ 3ca:	10 93 85 00 	sts	0x0085, r17	; 0x800085 <enuUARTCharacterSizeState>
+ 3ce:	81 e0       	ldi	r24, 0x01	; 1
+ 3d0:	80 93 86 00 	sts	0x0086, r24	; 0x800086 <enuUARTGroupState>
+ 3d4:	0f c0       	rjmp	.+30     	; 0x3f4 <UART_Init+0x13a>
+ 3d6:	80 e0       	ldi	r24, 0x00	; 0
+ 3d8:	0d c0       	rjmp	.+26     	; 0x3f4 <UART_Init+0x13a>
+ 3da:	80 e0       	ldi	r24, 0x00	; 0
+ 3dc:	0b c0       	rjmp	.+22     	; 0x3f4 <UART_Init+0x13a>
+ 3de:	80 e0       	ldi	r24, 0x00	; 0
+ 3e0:	09 c0       	rjmp	.+18     	; 0x3f4 <UART_Init+0x13a>
+ 3e2:	80 e0       	ldi	r24, 0x00	; 0
+ 3e4:	07 c0       	rjmp	.+14     	; 0x3f4 <UART_Init+0x13a>
+ 3e6:	80 e0       	ldi	r24, 0x00	; 0
+ 3e8:	05 c0       	rjmp	.+10     	; 0x3f4 <UART_Init+0x13a>
+ 3ea:	80 e0       	ldi	r24, 0x00	; 0
+ 3ec:	03 c0       	rjmp	.+6      	; 0x3f4 <UART_Init+0x13a>
+ 3ee:	80 e0       	ldi	r24, 0x00	; 0
+ 3f0:	01 c0       	rjmp	.+2      	; 0x3f4 <UART_Init+0x13a>
+ 3f2:	80 e0       	ldi	r24, 0x00	; 0
+ 3f4:	0f 90       	pop	r0
+ 3f6:	0f 90       	pop	r0
+ 3f8:	df 91       	pop	r29
+ 3fa:	cf 91       	pop	r28
+ 3fc:	1f 91       	pop	r17
+ 3fe:	0f 91       	pop	r16
+ 400:	ff 90       	pop	r15
+ 402:	08 95       	ret
+
+00000404 <UART_ReceiveString>:
+* Parameters	: *pu16Data - u8BufferMaxSize
+* Return Value	: enuErrorStatus_t
+* Description  : Initiate a data reception on UART module from external module
+*************************************************************************************************/
+enuErrorStatus_t UART_ReceiveString(uint8_t* pu8String)
+{
+ 404:	ac 01       	movw	r20, r24
+	enuErrorStatus_t enuRetVar;
+	uint8_t u8LoopIndex = 0;
+	uint8_t u8Flag = LOW;
+			
+	if(enuUARTGroupState == UART_INIT_DONE)
+ 406:	80 91 86 00 	lds	r24, 0x0086	; 0x800086 <enuUARTGroupState>
+ 40a:	81 30       	cpi	r24, 0x01	; 1
+ 40c:	f9 f4       	brne	.+62     	; 0x44c <UART_ReceiveString+0x48>
+	{
+		/* Enabling the receive enable to start reception */
+		SET_BIT(UCSRB_R, UART_RXEN_BIT);
+ 40e:	8a b1       	in	r24, 0x0a	; 10
+ 410:	80 61       	ori	r24, 0x10	; 16
+ 412:	8a b9       	out	0x0a, r24	; 10
+*************************************************************************************************/
+enuErrorStatus_t UART_ReceiveString(uint8_t* pu8String)
+{
+	enuErrorStatus_t enuRetVar;
+	uint8_t u8LoopIndex = 0;
+	uint8_t u8Flag = LOW;
+ 414:	30 e0       	ldi	r19, 0x00	; 0
+* Description  : Initiate a data reception on UART module from external module
+*************************************************************************************************/
+enuErrorStatus_t UART_ReceiveString(uint8_t* pu8String)
+{
+	enuErrorStatus_t enuRetVar;
+	uint8_t u8LoopIndex = 0;
+ 416:	20 e0       	ldi	r18, 0x00	; 0
+		/* Enabling the receive enable to start reception */
+		SET_BIT(UCSRB_R, UART_RXEN_BIT);
+		do 
+		{
+			/* Waiting for the data until it has successfully been received */
+			while(IS_BIT_CLEAR(UCSRA_R, UART_RXC_BIT));
+ 418:	5f 9b       	sbis	0x0b, 7	; 11
+ 41a:	fe cf       	rjmp	.-4      	; 0x418 <UART_ReceiveString+0x14>
+			/* Clearing reception complete flag */
+			SET_BIT(UCSRA_R, UART_RXC_BIT);
+ 41c:	9b b1       	in	r25, 0x0b	; 11
+ 41e:	90 68       	ori	r25, 0x80	; 128
+ 420:	9b b9       	out	0x0b, r25	; 11
+			/* Adding the value of the received data from the UART data register into the data variable */
+			*(pu8String + u8LoopIndex) = UDR_R;
+ 422:	9c b1       	in	r25, 0x0c	; 12
+ 424:	fa 01       	movw	r30, r20
+ 426:	e2 0f       	add	r30, r18
+ 428:	f1 1d       	adc	r31, r1
+ 42a:	90 83       	st	Z, r25
+			/* Checking if the value of the last received data is not \n or \r */
+			if((*(pu8String + u8LoopIndex) != '\n') && (*(pu8String + u8LoopIndex) != '\r'))
+ 42c:	9a 30       	cpi	r25, 0x0A	; 10
+ 42e:	21 f0       	breq	.+8      	; 0x438 <UART_ReceiveString+0x34>
+ 430:	9d 30       	cpi	r25, 0x0D	; 13
+ 432:	21 f0       	breq	.+8      	; 0x43c <UART_ReceiveString+0x38>
+			{
+				/* Incrementing the index of the array */
+				u8LoopIndex++;
+ 434:	2f 5f       	subi	r18, 0xFF	; 255
+ 436:	03 c0       	rjmp	.+6      	; 0x43e <UART_ReceiveString+0x3a>
+			}
+			else
+			{
+				/* Raising the flag to break the loop */
+				u8Flag = HIGH;
+ 438:	31 e0       	ldi	r19, 0x01	; 1
+ 43a:	01 c0       	rjmp	.+2      	; 0x43e <UART_ReceiveString+0x3a>
+ 43c:	31 e0       	ldi	r19, 0x01	; 1
+			}
+		} while(u8Flag == LOW);
+ 43e:	33 23       	and	r19, r19
+ 440:	59 f3       	breq	.-42     	; 0x418 <UART_ReceiveString+0x14>
+		/* Disabling the receive enable to stop reception */
+		CLEAR_BIT(UCSRB_R, UART_RXEN_BIT);
+ 442:	8a b1       	in	r24, 0x0a	; 10
+ 444:	8f 7e       	andi	r24, 0xEF	; 239
+ 446:	8a b9       	out	0x0a, r24	; 10
+		enuRetVar = E_OK;
+ 448:	81 e0       	ldi	r24, 0x01	; 1
+ 44a:	08 95       	ret
+	}
+	else
+	{
+		enuRetVar = E_ERROR;
+ 44c:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	return enuRetVar;
+ 44e:	08 95       	ret
+
+00000450 <__udivmodsi4>:
+ 450:	a1 e2       	ldi	r26, 0x21	; 33
+ 452:	1a 2e       	mov	r1, r26
+ 454:	aa 1b       	sub	r26, r26
+ 456:	bb 1b       	sub	r27, r27
+ 458:	fd 01       	movw	r30, r26
+ 45a:	0d c0       	rjmp	.+26     	; 0x476 <__udivmodsi4_ep>
+
+0000045c <__udivmodsi4_loop>:
+ 45c:	aa 1f       	adc	r26, r26
+ 45e:	bb 1f       	adc	r27, r27
+ 460:	ee 1f       	adc	r30, r30
+ 462:	ff 1f       	adc	r31, r31
+ 464:	a2 17       	cp	r26, r18
+ 466:	b3 07       	cpc	r27, r19
+ 468:	e4 07       	cpc	r30, r20
+ 46a:	f5 07       	cpc	r31, r21
+ 46c:	20 f0       	brcs	.+8      	; 0x476 <__udivmodsi4_ep>
+ 46e:	a2 1b       	sub	r26, r18
+ 470:	b3 0b       	sbc	r27, r19
+ 472:	e4 0b       	sbc	r30, r20
+ 474:	f5 0b       	sbc	r31, r21
+
+00000476 <__udivmodsi4_ep>:
+ 476:	66 1f       	adc	r22, r22
+ 478:	77 1f       	adc	r23, r23
+ 47a:	88 1f       	adc	r24, r24
+ 47c:	99 1f       	adc	r25, r25
+ 47e:	1a 94       	dec	r1
+ 480:	69 f7       	brne	.-38     	; 0x45c <__udivmodsi4_loop>
+ 482:	60 95       	com	r22
+ 484:	70 95       	com	r23
+ 486:	80 95       	com	r24
+ 488:	90 95       	com	r25
+ 48a:	9b 01       	movw	r18, r22
+ 48c:	ac 01       	movw	r20, r24
+ 48e:	bd 01       	movw	r22, r26
+ 490:	cf 01       	movw	r24, r30
+ 492:	08 95       	ret
+
+00000494 <_exit>:
+ 494:	f8 94       	cli
+
+00000496 <__stop_program>:
+ 496:	ff cf       	rjmp	.-2      	; 0x496 <__stop_program>
