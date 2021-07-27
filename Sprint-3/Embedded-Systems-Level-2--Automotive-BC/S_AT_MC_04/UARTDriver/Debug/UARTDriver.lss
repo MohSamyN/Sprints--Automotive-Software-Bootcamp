@@ -1,0 +1,541 @@
+
+UARTDriver.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000002f0  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000364  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000002  00800060  00800060  00000364  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000364  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000394  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000060  00000000  00000000  000003d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000a13  00000000  00000000  00000430  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000635  00000000  00000000  00000e43  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000421  00000000  00000000  00001478  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000000bc  00000000  00000000  0000189c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000005d7  00000000  00000000  00001958  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000003ef  00000000  00000000  00001f2f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000040  00000000  00000000  0000231e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   8:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  24:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  28:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  2c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  34:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  38:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  3c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  40:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a2 36       	cpi	r26, 0x62	; 98
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 3e 00 	call	0x7c	; 0x7c <main>
+  74:	0c 94 76 01 	jmp	0x2ec	; 0x2ec <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <main>:
+#include "UART.h"
+
+
+int main(void)
+{
+  7c:	cf 93       	push	r28
+  7e:	df 93       	push	r29
+  80:	cd b7       	in	r28, 0x3d	; 61
+  82:	de b7       	in	r29, 0x3e	; 62
+  84:	cf 5f       	subi	r28, 0xFF	; 255
+  86:	d1 09       	sbc	r29, r1
+  88:	0f b6       	in	r0, 0x3f	; 63
+  8a:	f8 94       	cli
+  8c:	de bf       	out	0x3e, r29	; 62
+  8e:	0f be       	out	0x3f, r0	; 63
+  90:	cd bf       	out	0x3d, r28	; 61
+	uint8_t u8String[255];
+	
+	UART_Init(9600, UART_EIGHT_CHARACTER_BITS, UART_ONE_STOP_BIT, UART_DISABLE_PARITY);
+  92:	00 e0       	ldi	r16, 0x00	; 0
+  94:	20 e0       	ldi	r18, 0x00	; 0
+  96:	43 e0       	ldi	r20, 0x03	; 3
+  98:	60 e8       	ldi	r22, 0x80	; 128
+  9a:	75 e2       	ldi	r23, 0x25	; 37
+  9c:	80 e0       	ldi	r24, 0x00	; 0
+  9e:	90 e0       	ldi	r25, 0x00	; 0
+  a0:	0e 94 5b 00 	call	0xb6	; 0xb6 <UART_Init>
+	UART_ReceiveString(u8String);
+  a4:	ce 01       	movw	r24, r28
+  a6:	01 96       	adiw	r24, 0x01	; 1
+  a8:	0e 94 2e 01 	call	0x25c	; 0x25c <UART_ReceiveString>
+	UART_SendString(u8String);
+  ac:	ce 01       	movw	r24, r28
+  ae:	01 96       	adiw	r24, 0x01	; 1
+  b0:	0e 94 00 01 	call	0x200	; 0x200 <UART_SendString>
+  b4:	ff cf       	rjmp	.-2      	; 0xb4 <main+0x38>
+
+000000b6 <UART_Init>:
+	else
+	{
+		enuRetVar = E_ERROR;
+	}
+	return enuRetVar;	
+}
+  b6:	ff 92       	push	r15
+  b8:	0f 93       	push	r16
+  ba:	1f 93       	push	r17
+  bc:	cf 93       	push	r28
+  be:	df 93       	push	r29
+  c0:	00 d0       	rcall	.+0      	; 0xc2 <UART_Init+0xc>
+  c2:	cd b7       	in	r28, 0x3d	; 61
+  c4:	de b7       	in	r29, 0x3e	; 62
+  c6:	14 2f       	mov	r17, r20
+  c8:	f2 2e       	mov	r15, r18
+  ca:	61 34       	cpi	r22, 0x41	; 65
+  cc:	22 e4       	ldi	r18, 0x42	; 66
+  ce:	72 07       	cpc	r23, r18
+  d0:	2f e0       	ldi	r18, 0x0F	; 15
+  d2:	82 07       	cpc	r24, r18
+  d4:	91 05       	cpc	r25, r1
+  d6:	08 f0       	brcs	.+2      	; 0xda <UART_Init+0x24>
+  d8:	7c c0       	rjmp	.+248    	; 0x1d2 <UART_Init+0x11c>
+  da:	48 30       	cpi	r20, 0x08	; 8
+  dc:	08 f0       	brcs	.+2      	; 0xe0 <UART_Init+0x2a>
+  de:	7b c0       	rjmp	.+246    	; 0x1d6 <UART_Init+0x120>
+  e0:	44 30       	cpi	r20, 0x04	; 4
+  e2:	09 f4       	brne	.+2      	; 0xe6 <UART_Init+0x30>
+  e4:	7a c0       	rjmp	.+244    	; 0x1da <UART_Init+0x124>
+  e6:	45 30       	cpi	r20, 0x05	; 5
+  e8:	09 f4       	brne	.+2      	; 0xec <UART_Init+0x36>
+  ea:	79 c0       	rjmp	.+242    	; 0x1de <UART_Init+0x128>
+  ec:	46 30       	cpi	r20, 0x06	; 6
+  ee:	09 f4       	brne	.+2      	; 0xf2 <UART_Init+0x3c>
+  f0:	78 c0       	rjmp	.+240    	; 0x1e2 <UART_Init+0x12c>
+  f2:	31 e0       	ldi	r19, 0x01	; 1
+  f4:	3f 15       	cp	r19, r15
+  f6:	08 f4       	brcc	.+2      	; 0xfa <UART_Init+0x44>
+  f8:	76 c0       	rjmp	.+236    	; 0x1e6 <UART_Init+0x130>
+  fa:	04 30       	cpi	r16, 0x04	; 4
+  fc:	08 f0       	brcs	.+2      	; 0x100 <UART_Init+0x4a>
+  fe:	75 c0       	rjmp	.+234    	; 0x1ea <UART_Init+0x134>
+ 100:	01 30       	cpi	r16, 0x01	; 1
+ 102:	09 f4       	brne	.+2      	; 0x106 <UART_Init+0x50>
+ 104:	74 c0       	rjmp	.+232    	; 0x1ee <UART_Init+0x138>
+ 106:	dc 01       	movw	r26, r24
+ 108:	cb 01       	movw	r24, r22
+ 10a:	88 0f       	add	r24, r24
+ 10c:	99 1f       	adc	r25, r25
+ 10e:	aa 1f       	adc	r26, r26
+ 110:	bb 1f       	adc	r27, r27
+ 112:	88 0f       	add	r24, r24
+ 114:	99 1f       	adc	r25, r25
+ 116:	aa 1f       	adc	r26, r26
+ 118:	bb 1f       	adc	r27, r27
+ 11a:	9c 01       	movw	r18, r24
+ 11c:	ad 01       	movw	r20, r26
+ 11e:	22 0f       	add	r18, r18
+ 120:	33 1f       	adc	r19, r19
+ 122:	44 1f       	adc	r20, r20
+ 124:	55 1f       	adc	r21, r21
+ 126:	22 0f       	add	r18, r18
+ 128:	33 1f       	adc	r19, r19
+ 12a:	44 1f       	adc	r20, r20
+ 12c:	55 1f       	adc	r21, r21
+ 12e:	60 e0       	ldi	r22, 0x00	; 0
+ 130:	72 e1       	ldi	r23, 0x12	; 18
+ 132:	8a e7       	ldi	r24, 0x7A	; 122
+ 134:	90 e0       	ldi	r25, 0x00	; 0
+ 136:	0e 94 54 01 	call	0x2a8	; 0x2a8 <__udivmodsi4>
+ 13a:	21 50       	subi	r18, 0x01	; 1
+ 13c:	31 09       	sbc	r19, r1
+ 13e:	3a 83       	std	Y+2, r19	; 0x02
+ 140:	29 83       	std	Y+1, r18	; 0x01
+ 142:	89 81       	ldd	r24, Y+1	; 0x01
+ 144:	9a 81       	ldd	r25, Y+2	; 0x02
+ 146:	8f 3f       	cpi	r24, 0xFF	; 255
+ 148:	91 05       	cpc	r25, r1
+ 14a:	79 f0       	breq	.+30     	; 0x16a <UART_Init+0xb4>
+ 14c:	70 f0       	brcs	.+28     	; 0x16a <UART_Init+0xb4>
+ 14e:	80 b5       	in	r24, 0x20	; 32
+ 150:	8f 77       	andi	r24, 0x7F	; 127
+ 152:	80 bd       	out	0x20, r24	; 32
+ 154:	80 b5       	in	r24, 0x20	; 32
+ 156:	80 68       	ori	r24, 0x80	; 128
+ 158:	80 bd       	out	0x20, r24	; 32
+ 15a:	80 b5       	in	r24, 0x20	; 32
+ 15c:	29 81       	ldd	r18, Y+1	; 0x01
+ 15e:	3a 81       	ldd	r19, Y+2	; 0x02
+ 160:	22 27       	eor	r18, r18
+ 162:	3f 70       	andi	r19, 0x0F	; 15
+ 164:	80 7f       	andi	r24, 0xF0	; 240
+ 166:	83 2b       	or	r24, r19
+ 168:	80 bd       	out	0x20, r24	; 32
+ 16a:	89 b1       	in	r24, 0x09	; 9
+ 16c:	89 81       	ldd	r24, Y+1	; 0x01
+ 16e:	9a 81       	ldd	r25, Y+2	; 0x02
+ 170:	89 b9       	out	0x09, r24	; 9
+ 172:	80 b5       	in	r24, 0x20	; 32
+ 174:	80 68       	ori	r24, 0x80	; 128
+ 176:	80 bd       	out	0x20, r24	; 32
+ 178:	20 b5       	in	r18, 0x20	; 32
+ 17a:	30 e1       	ldi	r19, 0x10	; 16
+ 17c:	03 9f       	mul	r16, r19
+ 17e:	c0 01       	movw	r24, r0
+ 180:	11 24       	eor	r1, r1
+ 182:	02 2f       	mov	r16, r18
+ 184:	0f 7c       	andi	r16, 0xCF	; 207
+ 186:	80 2b       	or	r24, r16
+ 188:	80 bd       	out	0x20, r24	; 32
+ 18a:	20 b5       	in	r18, 0x20	; 32
+ 18c:	8f 2d       	mov	r24, r15
+ 18e:	90 e0       	ldi	r25, 0x00	; 0
+ 190:	88 0f       	add	r24, r24
+ 192:	99 1f       	adc	r25, r25
+ 194:	88 0f       	add	r24, r24
+ 196:	99 1f       	adc	r25, r25
+ 198:	88 0f       	add	r24, r24
+ 19a:	99 1f       	adc	r25, r25
+ 19c:	92 2f       	mov	r25, r18
+ 19e:	97 7f       	andi	r25, 0xF7	; 247
+ 1a0:	89 2b       	or	r24, r25
+ 1a2:	80 bd       	out	0x20, r24	; 32
+ 1a4:	20 b5       	in	r18, 0x20	; 32
+ 1a6:	91 2f       	mov	r25, r17
+ 1a8:	93 70       	andi	r25, 0x03	; 3
+ 1aa:	89 2f       	mov	r24, r25
+ 1ac:	90 e0       	ldi	r25, 0x00	; 0
+ 1ae:	88 0f       	add	r24, r24
+ 1b0:	99 1f       	adc	r25, r25
+ 1b2:	92 2f       	mov	r25, r18
+ 1b4:	99 7f       	andi	r25, 0xF9	; 249
+ 1b6:	89 2b       	or	r24, r25
+ 1b8:	80 bd       	out	0x20, r24	; 32
+ 1ba:	8a b1       	in	r24, 0x0a	; 10
+ 1bc:	8b 7f       	andi	r24, 0xFB	; 251
+ 1be:	91 2f       	mov	r25, r17
+ 1c0:	94 70       	andi	r25, 0x04	; 4
+ 1c2:	89 2b       	or	r24, r25
+ 1c4:	8a b9       	out	0x0a, r24	; 10
+ 1c6:	10 93 60 00 	sts	0x0060, r17	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1ca:	81 e0       	ldi	r24, 0x01	; 1
+ 1cc:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <enuUARTGroupState>
+ 1d0:	0f c0       	rjmp	.+30     	; 0x1f0 <UART_Init+0x13a>
+ 1d2:	80 e0       	ldi	r24, 0x00	; 0
+ 1d4:	0d c0       	rjmp	.+26     	; 0x1f0 <UART_Init+0x13a>
+ 1d6:	80 e0       	ldi	r24, 0x00	; 0
+ 1d8:	0b c0       	rjmp	.+22     	; 0x1f0 <UART_Init+0x13a>
+ 1da:	80 e0       	ldi	r24, 0x00	; 0
+ 1dc:	09 c0       	rjmp	.+18     	; 0x1f0 <UART_Init+0x13a>
+ 1de:	80 e0       	ldi	r24, 0x00	; 0
+ 1e0:	07 c0       	rjmp	.+14     	; 0x1f0 <UART_Init+0x13a>
+ 1e2:	80 e0       	ldi	r24, 0x00	; 0
+ 1e4:	05 c0       	rjmp	.+10     	; 0x1f0 <UART_Init+0x13a>
+ 1e6:	80 e0       	ldi	r24, 0x00	; 0
+ 1e8:	03 c0       	rjmp	.+6      	; 0x1f0 <UART_Init+0x13a>
+ 1ea:	80 e0       	ldi	r24, 0x00	; 0
+ 1ec:	01 c0       	rjmp	.+2      	; 0x1f0 <UART_Init+0x13a>
+ 1ee:	80 e0       	ldi	r24, 0x00	; 0
+ 1f0:	0f 90       	pop	r0
+ 1f2:	0f 90       	pop	r0
+ 1f4:	df 91       	pop	r29
+ 1f6:	cf 91       	pop	r28
+ 1f8:	1f 91       	pop	r17
+ 1fa:	0f 91       	pop	r16
+ 1fc:	ff 90       	pop	r15
+ 1fe:	08 95       	ret
+
+00000200 <UART_SendString>:
+* Parameters	: *pu16Data
+* Return Value	: enuErrorStatus_t
+* Description  : Initiate a data transmission from UART module to external module
+*************************************************************************************************/
+enuErrorStatus_t UART_SendString(uint8_t* pu8String)
+{
+ 200:	ac 01       	movw	r20, r24
+	enuErrorStatus_t enuRetVar;
+	uint8_t u8LoopIndex = 0;
+	uint8_t u8Flag = LOW;	
+	
+	if(enuUARTGroupState == UART_INIT_DONE)
+ 202:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <enuUARTGroupState>
+ 206:	81 30       	cpi	r24, 0x01	; 1
+ 208:	39 f5       	brne	.+78     	; 0x258 <UART_SendString+0x58>
+	{
+		/* Enabling the transmit enable to start transmission */
+		SET_BIT(UCSRB_R, UART_TXEN_BIT);
+ 20a:	8a b1       	in	r24, 0x0a	; 10
+ 20c:	88 60       	ori	r24, 0x08	; 8
+ 20e:	8a b9       	out	0x0a, r24	; 10
+*************************************************************************************************/
+enuErrorStatus_t UART_SendString(uint8_t* pu8String)
+{
+	enuErrorStatus_t enuRetVar;
+	uint8_t u8LoopIndex = 0;
+	uint8_t u8Flag = LOW;	
+ 210:	30 e0       	ldi	r19, 0x00	; 0
+* Description  : Initiate a data transmission from UART module to external module
+*************************************************************************************************/
+enuErrorStatus_t UART_SendString(uint8_t* pu8String)
+{
+	enuErrorStatus_t enuRetVar;
+	uint8_t u8LoopIndex = 0;
+ 212:	90 e0       	ldi	r25, 0x00	; 0
+		/* Enabling the transmit enable to start transmission */
+		SET_BIT(UCSRB_R, UART_TXEN_BIT);
+		do
+		{		
+			/* Inserting the data to be transmitted into the data register */
+			UDR_R = *(pu8String + u8LoopIndex);
+ 214:	fa 01       	movw	r30, r20
+ 216:	e9 0f       	add	r30, r25
+ 218:	f1 1d       	adc	r31, r1
+ 21a:	80 81       	ld	r24, Z
+ 21c:	8c b9       	out	0x0c, r24	; 12
+			/* Waiting for the data until it has successfully been transmitted */
+			while(IS_BIT_CLEAR(UCSRA_R, UART_TXC_BIT));
+ 21e:	5e 9b       	sbis	0x0b, 6	; 11
+ 220:	fe cf       	rjmp	.-4      	; 0x21e <UART_SendString+0x1e>
+			/* Clearing transmission complete flag */
+			SET_BIT(UCSRA_R, UART_TXC_BIT);
+ 222:	2b b1       	in	r18, 0x0b	; 11
+ 224:	20 64       	ori	r18, 0x40	; 64
+ 226:	2b b9       	out	0x0b, r18	; 11
+			/* Incrementing the index of the input string */
+			u8LoopIndex++;
+ 228:	9f 5f       	subi	r25, 0xFF	; 255
+			/* Checking if the next element in the input string is \n or \r */
+			if((*(pu8String + u8LoopIndex) == '\n') || (*(pu8String + u8LoopIndex) == '\r') || (u8LoopIndex == UART_MAX_STRING_SIZE))
+ 22a:	fa 01       	movw	r30, r20
+ 22c:	e9 0f       	add	r30, r25
+ 22e:	f1 1d       	adc	r31, r1
+ 230:	20 81       	ld	r18, Z
+ 232:	2a 30       	cpi	r18, 0x0A	; 10
+ 234:	29 f0       	breq	.+10     	; 0x240 <UART_SendString+0x40>
+ 236:	2d 30       	cpi	r18, 0x0D	; 13
+ 238:	29 f0       	breq	.+10     	; 0x244 <UART_SendString+0x44>
+ 23a:	9f 3f       	cpi	r25, 0xFF	; 255
+ 23c:	31 f4       	brne	.+12     	; 0x24a <UART_SendString+0x4a>
+ 23e:	04 c0       	rjmp	.+8      	; 0x248 <UART_SendString+0x48>
+			{
+				/* Raising the flag to break the loop */
+				u8Flag = HIGH;
+ 240:	31 e0       	ldi	r19, 0x01	; 1
+ 242:	03 c0       	rjmp	.+6      	; 0x24a <UART_SendString+0x4a>
+ 244:	31 e0       	ldi	r19, 0x01	; 1
+ 246:	01 c0       	rjmp	.+2      	; 0x24a <UART_SendString+0x4a>
+ 248:	31 e0       	ldi	r19, 0x01	; 1
+			}
+			else
+			{
+			}
+		} while(u8Flag == LOW);
+ 24a:	33 23       	and	r19, r19
+ 24c:	19 f3       	breq	.-58     	; 0x214 <UART_SendString+0x14>
+		/* Disabling the transmit enable to stop transmission */
+		CLEAR_BIT(UCSRB_R, UART_TXEN_BIT);
+ 24e:	8a b1       	in	r24, 0x0a	; 10
+ 250:	87 7f       	andi	r24, 0xF7	; 247
+ 252:	8a b9       	out	0x0a, r24	; 10
+		enuRetVar = E_OK;
+ 254:	81 e0       	ldi	r24, 0x01	; 1
+ 256:	08 95       	ret
+	}
+	else
+	{
+		enuRetVar = E_ERROR;
+ 258:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	return enuRetVar;	
+}
+ 25a:	08 95       	ret
+
+0000025c <UART_ReceiveString>:
+* Parameters	: *pu16Data - u8BufferMaxSize
+* Return Value	: enuErrorStatus_t
+* Description  : Initiate a data reception on UART module from external module
+*************************************************************************************************/
+enuErrorStatus_t UART_ReceiveString(uint8_t* pu8String)
+{
+ 25c:	ac 01       	movw	r20, r24
+	enuErrorStatus_t enuRetVar;
+	uint8_t u8LoopIndex = 0;
+	uint8_t u8Flag = LOW;
+	uint8_t u8TempData;
+			
+	if(enuUARTGroupState == UART_INIT_DONE)
+ 25e:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <enuUARTGroupState>
+ 262:	81 30       	cpi	r24, 0x01	; 1
+ 264:	f9 f4       	brne	.+62     	; 0x2a4 <UART_ReceiveString+0x48>
+	{
+		/* Enabling the receive enable to start reception */
+		SET_BIT(UCSRB_R, UART_RXEN_BIT);
+ 266:	8a b1       	in	r24, 0x0a	; 10
+ 268:	80 61       	ori	r24, 0x10	; 16
+ 26a:	8a b9       	out	0x0a, r24	; 10
+*************************************************************************************************/
+enuErrorStatus_t UART_ReceiveString(uint8_t* pu8String)
+{
+	enuErrorStatus_t enuRetVar;
+	uint8_t u8LoopIndex = 0;
+	uint8_t u8Flag = LOW;
+ 26c:	30 e0       	ldi	r19, 0x00	; 0
+* Description  : Initiate a data reception on UART module from external module
+*************************************************************************************************/
+enuErrorStatus_t UART_ReceiveString(uint8_t* pu8String)
+{
+	enuErrorStatus_t enuRetVar;
+	uint8_t u8LoopIndex = 0;
+ 26e:	20 e0       	ldi	r18, 0x00	; 0
+		/* Enabling the receive enable to start reception */
+		SET_BIT(UCSRB_R, UART_RXEN_BIT);
+		do 
+		{
+			/* Waiting for the data until it has successfully been received */
+			while(IS_BIT_CLEAR(UCSRA_R, UART_RXC_BIT));
+ 270:	5f 9b       	sbis	0x0b, 7	; 11
+ 272:	fe cf       	rjmp	.-4      	; 0x270 <UART_ReceiveString+0x14>
+			/* Clearing reception complete flag */
+			SET_BIT(UCSRA_R, UART_RXC_BIT);
+ 274:	9b b1       	in	r25, 0x0b	; 11
+ 276:	90 68       	ori	r25, 0x80	; 128
+ 278:	9b b9       	out	0x0b, r25	; 11
+			/* Adding the value of the received data from the UART data register into a temporary data variable */
+			u8TempData = UDR_R;
+ 27a:	9c b1       	in	r25, 0x0c	; 12
+			/* Checking if the value of the last received data inside the temporary data variable is not \n or \r */
+			if((u8TempData != '\n') && (u8TempData != '\r'))
+ 27c:	9a 30       	cpi	r25, 0x0A	; 10
+ 27e:	41 f0       	breq	.+16     	; 0x290 <UART_ReceiveString+0x34>
+ 280:	9d 30       	cpi	r25, 0x0D	; 13
+ 282:	41 f0       	breq	.+16     	; 0x294 <UART_ReceiveString+0x38>
+			{
+				/* Adding the value of the temporary data variable into the the data array */
+				*(pu8String + u8LoopIndex) = u8TempData;
+ 284:	fa 01       	movw	r30, r20
+ 286:	e2 0f       	add	r30, r18
+ 288:	f1 1d       	adc	r31, r1
+ 28a:	90 83       	st	Z, r25
+				/* Incrementing the index of the array */
+				u8LoopIndex++;
+ 28c:	2f 5f       	subi	r18, 0xFF	; 255
+ 28e:	03 c0       	rjmp	.+6      	; 0x296 <UART_ReceiveString+0x3a>
+			}
+			else
+			{
+				/* Raising the flag to break the loop */
+				u8Flag = HIGH;
+ 290:	31 e0       	ldi	r19, 0x01	; 1
+ 292:	01 c0       	rjmp	.+2      	; 0x296 <UART_ReceiveString+0x3a>
+ 294:	31 e0       	ldi	r19, 0x01	; 1
+			}
+		} while(u8Flag == LOW);
+ 296:	33 23       	and	r19, r19
+ 298:	59 f3       	breq	.-42     	; 0x270 <UART_ReceiveString+0x14>
+		/* Disabling the receive enable to stop reception */
+		CLEAR_BIT(UCSRB_R, UART_RXEN_BIT);
+ 29a:	8a b1       	in	r24, 0x0a	; 10
+ 29c:	8f 7e       	andi	r24, 0xEF	; 239
+ 29e:	8a b9       	out	0x0a, r24	; 10
+		enuRetVar = E_OK;
+ 2a0:	81 e0       	ldi	r24, 0x01	; 1
+ 2a2:	08 95       	ret
+	}
+	else
+	{
+		enuRetVar = E_ERROR;
+ 2a4:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	return enuRetVar;
+ 2a6:	08 95       	ret
+
+000002a8 <__udivmodsi4>:
+ 2a8:	a1 e2       	ldi	r26, 0x21	; 33
+ 2aa:	1a 2e       	mov	r1, r26
+ 2ac:	aa 1b       	sub	r26, r26
+ 2ae:	bb 1b       	sub	r27, r27
+ 2b0:	fd 01       	movw	r30, r26
+ 2b2:	0d c0       	rjmp	.+26     	; 0x2ce <__udivmodsi4_ep>
+
+000002b4 <__udivmodsi4_loop>:
+ 2b4:	aa 1f       	adc	r26, r26
+ 2b6:	bb 1f       	adc	r27, r27
+ 2b8:	ee 1f       	adc	r30, r30
+ 2ba:	ff 1f       	adc	r31, r31
+ 2bc:	a2 17       	cp	r26, r18
+ 2be:	b3 07       	cpc	r27, r19
+ 2c0:	e4 07       	cpc	r30, r20
+ 2c2:	f5 07       	cpc	r31, r21
+ 2c4:	20 f0       	brcs	.+8      	; 0x2ce <__udivmodsi4_ep>
+ 2c6:	a2 1b       	sub	r26, r18
+ 2c8:	b3 0b       	sbc	r27, r19
+ 2ca:	e4 0b       	sbc	r30, r20
+ 2cc:	f5 0b       	sbc	r31, r21
+
+000002ce <__udivmodsi4_ep>:
+ 2ce:	66 1f       	adc	r22, r22
+ 2d0:	77 1f       	adc	r23, r23
+ 2d2:	88 1f       	adc	r24, r24
+ 2d4:	99 1f       	adc	r25, r25
+ 2d6:	1a 94       	dec	r1
+ 2d8:	69 f7       	brne	.-38     	; 0x2b4 <__udivmodsi4_loop>
+ 2da:	60 95       	com	r22
+ 2dc:	70 95       	com	r23
+ 2de:	80 95       	com	r24
+ 2e0:	90 95       	com	r25
+ 2e2:	9b 01       	movw	r18, r22
+ 2e4:	ac 01       	movw	r20, r24
+ 2e6:	bd 01       	movw	r22, r26
+ 2e8:	cf 01       	movw	r24, r30
+ 2ea:	08 95       	ret
+
+000002ec <_exit>:
+ 2ec:	f8 94       	cli
+
+000002ee <__stop_program>:
+ 2ee:	ff cf       	rjmp	.-2      	; 0x2ee <__stop_program>
