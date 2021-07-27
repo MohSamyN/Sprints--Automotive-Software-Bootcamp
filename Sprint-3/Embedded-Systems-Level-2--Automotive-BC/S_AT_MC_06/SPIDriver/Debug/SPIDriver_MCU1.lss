@@ -1,0 +1,484 @@
+
+SPIDriver_MCU1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000002ba  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000004  00800060  000002ba  0000034e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000021  00800064  00800064  00000352  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000352  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000384  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000b8  00000000  00000000  000003c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00001237  00000000  00000000  00000478  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000723  00000000  00000000  000016af  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000058e  00000000  00000000  00001dd2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000138  00000000  00000000  00002360  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000821  00000000  00000000  00002498  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000007a1  00000000  00000000  00002cb9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000088  00000000  00000000  0000345a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ea eb       	ldi	r30, 0xBA	; 186
+  68:	f2 e0       	ldi	r31, 0x02	; 2
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a4 36       	cpi	r26, 0x64	; 100
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a4 e6       	ldi	r26, 0x64	; 100
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a5 38       	cpi	r26, 0x85	; 133
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 af 00 	call	0x15e	; 0x15e <main>
+  8a:	0c 94 5b 01 	jmp	0x2b6	; 0x2b6 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <DIO_PinInit>:
+	else
+	{
+		enuRetVar = E_ERROR;
+	}
+	return enuRetVar;
+}
+  92:	80 32       	cpi	r24, 0x20	; 32
+  94:	b0 f5       	brcc	.+108    	; 0x102 <DIO_PinInit+0x70>
+  96:	62 30       	cpi	r22, 0x02	; 2
+  98:	b0 f5       	brcc	.+108    	; 0x106 <DIO_PinInit+0x74>
+  9a:	42 30       	cpi	r20, 0x02	; 2
+  9c:	b0 f5       	brcc	.+108    	; 0x10a <DIO_PinInit+0x78>
+  9e:	e8 2f       	mov	r30, r24
+  a0:	e6 95       	lsr	r30
+  a2:	e6 95       	lsr	r30
+  a4:	e6 95       	lsr	r30
+  a6:	f0 e0       	ldi	r31, 0x00	; 0
+  a8:	e0 5a       	subi	r30, 0xA0	; 160
+  aa:	ff 4f       	sbci	r31, 0xFF	; 255
+  ac:	e0 81       	ld	r30, Z
+  ae:	f0 e0       	ldi	r31, 0x00	; 0
+  b0:	df 01       	movw	r26, r30
+  b2:	5e 91       	ld	r21, -X
+  b4:	98 2f       	mov	r25, r24
+  b6:	97 70       	andi	r25, 0x07	; 7
+  b8:	21 e0       	ldi	r18, 0x01	; 1
+  ba:	30 e0       	ldi	r19, 0x00	; 0
+  bc:	09 2e       	mov	r0, r25
+  be:	02 c0       	rjmp	.+4      	; 0xc4 <DIO_PinInit+0x32>
+  c0:	22 0f       	add	r18, r18
+  c2:	33 1f       	adc	r19, r19
+  c4:	0a 94       	dec	r0
+  c6:	e2 f7       	brpl	.-8      	; 0xc0 <DIO_PinInit+0x2e>
+  c8:	20 95       	com	r18
+  ca:	70 e0       	ldi	r23, 0x00	; 0
+  cc:	09 2e       	mov	r0, r25
+  ce:	02 c0       	rjmp	.+4      	; 0xd4 <DIO_PinInit+0x42>
+  d0:	66 0f       	add	r22, r22
+  d2:	77 1f       	adc	r23, r23
+  d4:	0a 94       	dec	r0
+  d6:	e2 f7       	brpl	.-8      	; 0xd0 <DIO_PinInit+0x3e>
+  d8:	35 2f       	mov	r19, r21
+  da:	32 23       	and	r19, r18
+  dc:	63 2b       	or	r22, r19
+  de:	6c 93       	st	X, r22
+  e0:	30 81       	ld	r19, Z
+  e2:	50 e0       	ldi	r21, 0x00	; 0
+  e4:	02 c0       	rjmp	.+4      	; 0xea <DIO_PinInit+0x58>
+  e6:	44 0f       	add	r20, r20
+  e8:	55 1f       	adc	r21, r21
+  ea:	9a 95       	dec	r25
+  ec:	e2 f7       	brpl	.-8      	; 0xe6 <DIO_PinInit+0x54>
+  ee:	23 23       	and	r18, r19
+  f0:	42 2b       	or	r20, r18
+  f2:	40 83       	st	Z, r20
+  f4:	e8 2f       	mov	r30, r24
+  f6:	f0 e0       	ldi	r31, 0x00	; 0
+  f8:	ec 59       	subi	r30, 0x9C	; 156
+  fa:	ff 4f       	sbci	r31, 0xFF	; 255
+  fc:	81 e0       	ldi	r24, 0x01	; 1
+  fe:	80 83       	st	Z, r24
+ 100:	08 95       	ret
+ 102:	80 e0       	ldi	r24, 0x00	; 0
+ 104:	08 95       	ret
+ 106:	80 e0       	ldi	r24, 0x00	; 0
+ 108:	08 95       	ret
+ 10a:	80 e0       	ldi	r24, 0x00	; 0
+ 10c:	08 95       	ret
+
+0000010e <DIO_PinWrite>:
+*************************************************************************************************/
+enuErrorStatus_t DIO_PinWrite(enuDIOPinNo_t enuDIOPinNo, uint8_t u8PinData)
+{
+	enuErrorStatus_t enuRetVar;
+	
+	if(aenuDIOPinState[enuDIOPinNo] == DIO_INIT_DONE)
+ 10e:	e8 2f       	mov	r30, r24
+ 110:	f0 e0       	ldi	r31, 0x00	; 0
+ 112:	ec 59       	subi	r30, 0x9C	; 156
+ 114:	ff 4f       	sbci	r31, 0xFF	; 255
+ 116:	90 81       	ld	r25, Z
+ 118:	91 30       	cpi	r25, 0x01	; 1
+ 11a:	f9 f4       	brne	.+62     	; 0x15a <DIO_PinWrite+0x4c>
+	{
+		/* Writing the value into the corresponding pin */
+		ASSIGN_BIT(PORTx_R(DIO_PORT_NO(enuDIOPinNo)), DIO_PIN_NO(enuDIOPinNo), u8PinData);
+ 11c:	e8 2f       	mov	r30, r24
+ 11e:	e6 95       	lsr	r30
+ 120:	e6 95       	lsr	r30
+ 122:	e6 95       	lsr	r30
+ 124:	f0 e0       	ldi	r31, 0x00	; 0
+ 126:	e0 5a       	subi	r30, 0xA0	; 160
+ 128:	ff 4f       	sbci	r31, 0xFF	; 255
+ 12a:	e0 81       	ld	r30, Z
+ 12c:	f0 e0       	ldi	r31, 0x00	; 0
+ 12e:	90 81       	ld	r25, Z
+ 130:	87 70       	andi	r24, 0x07	; 7
+ 132:	21 e0       	ldi	r18, 0x01	; 1
+ 134:	30 e0       	ldi	r19, 0x00	; 0
+ 136:	08 2e       	mov	r0, r24
+ 138:	02 c0       	rjmp	.+4      	; 0x13e <DIO_PinWrite+0x30>
+ 13a:	22 0f       	add	r18, r18
+ 13c:	33 1f       	adc	r19, r19
+ 13e:	0a 94       	dec	r0
+ 140:	e2 f7       	brpl	.-8      	; 0x13a <DIO_PinWrite+0x2c>
+ 142:	70 e0       	ldi	r23, 0x00	; 0
+ 144:	02 c0       	rjmp	.+4      	; 0x14a <DIO_PinWrite+0x3c>
+ 146:	66 0f       	add	r22, r22
+ 148:	77 1f       	adc	r23, r23
+ 14a:	8a 95       	dec	r24
+ 14c:	e2 f7       	brpl	.-8      	; 0x146 <DIO_PinWrite+0x38>
+ 14e:	20 95       	com	r18
+ 150:	29 23       	and	r18, r25
+ 152:	62 2b       	or	r22, r18
+ 154:	60 83       	st	Z, r22
+		enuRetVar = E_OK;
+ 156:	81 e0       	ldi	r24, 0x01	; 1
+ 158:	08 95       	ret
+	}
+	else
+	{
+		enuRetVar = E_ERROR;
+ 15a:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	return enuRetVar;	
+}
+ 15c:	08 95       	ret
+
+0000015e <main>:
+#include "SPI.h"
+
+
+int main(void)
+{	
+	SPI_Init(SPI_FOSC_OVER_128, SPI_CPHA_LOW, SPI_CPOL_LOW, SPI_MASTER_MODE, SPI_MSB_TRANSMITTED_FIRST);  
+ 15e:	00 e0       	ldi	r16, 0x00	; 0
+ 160:	21 e0       	ldi	r18, 0x01	; 1
+ 162:	40 e0       	ldi	r20, 0x00	; 0
+ 164:	60 e0       	ldi	r22, 0x00	; 0
+ 166:	83 e0       	ldi	r24, 0x03	; 3
+ 168:	0e 94 be 00 	call	0x17c	; 0x17c <SPI_Init>
+	DIO_PinWrite(PB4, LOW);
+ 16c:	60 e0       	ldi	r22, 0x00	; 0
+ 16e:	8c e0       	ldi	r24, 0x0C	; 12
+ 170:	0e 94 87 00 	call	0x10e	; 0x10e <DIO_PinWrite>
+	SPI_SendChar((uint8_t)'A');
+ 174:	81 e4       	ldi	r24, 0x41	; 65
+ 176:	0e 94 50 01 	call	0x2a0	; 0x2a0 <SPI_SendChar>
+ 17a:	ff cf       	rjmp	.-2      	; 0x17a <main+0x1c>
+
+0000017c <SPI_Init>:
+* Return Value	: enuErrorStatus_t
+* Description  : Initialize the SPI module according to the configuration
+*************************************************************************************************/
+enuErrorStatus_t SPI_Init(enuSPIClockRateSelect_t enuSPIClockRateSelect, enuSPIClockPhase_t enuSPIClockPhase, enuSPIClockPolarity_t enuSPIClockPolarity,
+enuSPIMasterSlaveSelect_t enuSPIMasterSlaveSelect, enuSPIDataOrder_t enuSPIDataOrder)
+{
+ 17c:	ff 92       	push	r15
+ 17e:	0f 93       	push	r16
+ 180:	1f 93       	push	r17
+ 182:	cf 93       	push	r28
+ 184:	df 93       	push	r29
+	enuErrorStatus_t enuRetVar;
+	
+	/* Checking that all configurations are correctly configured */
+	if((enuSPIClockRateSelect > SPI_CLOCK_RATE_SELECT_MIN_VALUE) && (enuSPIClockRateSelect < SPI_CLOCK_RATE_SELECT_MAX_VALUE)	&&
+ 186:	88 30       	cpi	r24, 0x08	; 8
+ 188:	08 f0       	brcs	.+2      	; 0x18c <SPI_Init+0x10>
+ 18a:	7b c0       	rjmp	.+246    	; 0x282 <SPI_Init+0x106>
+ 18c:	62 30       	cpi	r22, 0x02	; 2
+ 18e:	08 f0       	brcs	.+2      	; 0x192 <SPI_Init+0x16>
+ 190:	7a c0       	rjmp	.+244    	; 0x286 <SPI_Init+0x10a>
+		((enuSPIClockPhase == SPI_CPHA_LOW)					|| (enuSPIClockPhase == SPI_CPHA_HIGH))				&&
+ 192:	42 30       	cpi	r20, 0x02	; 2
+ 194:	08 f0       	brcs	.+2      	; 0x198 <SPI_Init+0x1c>
+ 196:	79 c0       	rjmp	.+242    	; 0x28a <SPI_Init+0x10e>
+		((enuSPIClockPolarity == SPI_CPOL_LOW)				|| (enuSPIClockPolarity == SPI_CPOL_HIGH))			&&
+ 198:	22 30       	cpi	r18, 0x02	; 2
+ 19a:	08 f0       	brcs	.+2      	; 0x19e <SPI_Init+0x22>
+ 19c:	78 c0       	rjmp	.+240    	; 0x28e <SPI_Init+0x112>
+		((enuSPIMasterSlaveSelect == SPI_SLAVE_MODE)		|| (enuSPIMasterSlaveSelect == SPI_MASTER_MODE))	&&
+ 19e:	02 30       	cpi	r16, 0x02	; 2
+ 1a0:	08 f0       	brcs	.+2      	; 0x1a4 <SPI_Init+0x28>
+ 1a2:	77 c0       	rjmp	.+238    	; 0x292 <SPI_Init+0x116>
+ 1a4:	d2 2f       	mov	r29, r18
+ 1a6:	14 2f       	mov	r17, r20
+ 1a8:	f6 2e       	mov	r15, r22
+ 1aa:	c8 2f       	mov	r28, r24
+		((enuSPIDataOrder == SPI_MSB_TRANSMITTED_FIRST)	|| (enuSPIDataOrder == SPI_LSB_TRANSMITTED_FIRST)))
+	{
+		/* Initialize DIO pins to work as SPI module pins */
+		if(enuSPIMasterSlaveSelect == SPI_SLAVE_MODE)
+ 1ac:	21 11       	cpse	r18, r1
+ 1ae:	15 c0       	rjmp	.+42     	; 0x1da <SPI_Init+0x5e>
+		{
+			/* Initialize SS pin as input */
+			DIO_PinInit(PB4, INPUT, NO_CONNECTION);
+ 1b0:	40 e0       	ldi	r20, 0x00	; 0
+ 1b2:	60 e0       	ldi	r22, 0x00	; 0
+ 1b4:	8c e0       	ldi	r24, 0x0C	; 12
+ 1b6:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+			/* Initialize MOSI pin as input */
+			DIO_PinInit(PB5, INPUT, NO_CONNECTION);
+ 1ba:	40 e0       	ldi	r20, 0x00	; 0
+ 1bc:	60 e0       	ldi	r22, 0x00	; 0
+ 1be:	8d e0       	ldi	r24, 0x0D	; 13
+ 1c0:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+			/* Initialize MISO pin as output */
+			DIO_PinInit(PB6, OUTPUT, NO_CONNECTION);
+ 1c4:	40 e0       	ldi	r20, 0x00	; 0
+ 1c6:	61 e0       	ldi	r22, 0x01	; 1
+ 1c8:	8e e0       	ldi	r24, 0x0E	; 14
+ 1ca:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+			/* Initialize SCK pin as input */
+			DIO_PinInit(PB7, INPUT, NO_CONNECTION);
+ 1ce:	40 e0       	ldi	r20, 0x00	; 0
+ 1d0:	60 e0       	ldi	r22, 0x00	; 0
+ 1d2:	8f e0       	ldi	r24, 0x0F	; 15
+ 1d4:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+ 1d8:	14 c0       	rjmp	.+40     	; 0x202 <SPI_Init+0x86>
+		}
+		else
+		{
+			/* Initialize SS pin as output */
+			DIO_PinInit(PB4, OUTPUT, NO_CONNECTION);
+ 1da:	40 e0       	ldi	r20, 0x00	; 0
+ 1dc:	61 e0       	ldi	r22, 0x01	; 1
+ 1de:	8c e0       	ldi	r24, 0x0C	; 12
+ 1e0:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+			/* Initialize MOSI pin as output */
+			DIO_PinInit(PB5, OUTPUT, NO_CONNECTION);
+ 1e4:	40 e0       	ldi	r20, 0x00	; 0
+ 1e6:	61 e0       	ldi	r22, 0x01	; 1
+ 1e8:	8d e0       	ldi	r24, 0x0D	; 13
+ 1ea:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+			/* Initialize MISO pin as input */
+			DIO_PinInit(PB6, INPUT, NO_CONNECTION);
+ 1ee:	40 e0       	ldi	r20, 0x00	; 0
+ 1f0:	60 e0       	ldi	r22, 0x00	; 0
+ 1f2:	8e e0       	ldi	r24, 0x0E	; 14
+ 1f4:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+			/* Initialize SCK pin as output */
+			DIO_PinInit(PB7, OUTPUT, NO_CONNECTION);	
+ 1f8:	40 e0       	ldi	r20, 0x00	; 0
+ 1fa:	61 e0       	ldi	r22, 0x01	; 1
+ 1fc:	8f e0       	ldi	r24, 0x0F	; 15
+ 1fe:	0e 94 49 00 	call	0x92	; 0x92 <DIO_PinInit>
+		}
+		/* Selecting the mode of SPI module, whether it is master of slave */
+		ASSIGN_BIT(SPCR_R, SPI_MSTR_BIT, enuSPIMasterSlaveSelect);
+ 202:	2d b1       	in	r18, 0x0d	; 13
+ 204:	30 e1       	ldi	r19, 0x10	; 16
+ 206:	d3 9f       	mul	r29, r19
+ 208:	c0 01       	movw	r24, r0
+ 20a:	11 24       	eor	r1, r1
+ 20c:	92 2f       	mov	r25, r18
+ 20e:	9f 7e       	andi	r25, 0xEF	; 239
+ 210:	89 2b       	or	r24, r25
+ 212:	8d b9       	out	0x0d, r24	; 13
+		/* Selecting the SCK rate of the device configured as a Master */
+		ASSIGN_BITS(SPCR_R, SPI_SPR_START_BIT, enuSPIClockRateSelect, SPI_SPR_MASK);
+ 214:	8d b1       	in	r24, 0x0d	; 13
+ 216:	8c 7f       	andi	r24, 0xFC	; 252
+ 218:	8c 2b       	or	r24, r28
+ 21a:	8d b9       	out	0x0d, r24	; 13
+		/* Selecting whether the double speed feature is disabled or enabled according to the selected SCK rate */
+		ASSIGN_BIT(SPSR_R, SPI_SPI2X_BIT, SPI_SPI2X_VALUE(enuSPIClockRateSelect));
+ 21c:	2e b1       	in	r18, 0x0e	; 14
+ 21e:	8c 2f       	mov	r24, r28
+ 220:	84 70       	andi	r24, 0x04	; 4
+ 222:	90 e0       	ldi	r25, 0x00	; 0
+ 224:	95 95       	asr	r25
+ 226:	87 95       	ror	r24
+ 228:	95 95       	asr	r25
+ 22a:	87 95       	ror	r24
+ 22c:	92 2f       	mov	r25, r18
+ 22e:	9e 7f       	andi	r25, 0xFE	; 254
+ 230:	89 2b       	or	r24, r25
+ 232:	8e b9       	out	0x0e, r24	; 14
+		/* Selecting the SCK clock phase of the device */
+		ASSIGN_BIT(SPCR_R, SPI_CPHA_BIT, enuSPIClockPhase);
+ 234:	2d b1       	in	r18, 0x0d	; 13
+ 236:	8f 2d       	mov	r24, r15
+ 238:	90 e0       	ldi	r25, 0x00	; 0
+ 23a:	88 0f       	add	r24, r24
+ 23c:	99 1f       	adc	r25, r25
+ 23e:	88 0f       	add	r24, r24
+ 240:	99 1f       	adc	r25, r25
+ 242:	92 2f       	mov	r25, r18
+ 244:	9b 7f       	andi	r25, 0xFB	; 251
+ 246:	89 2b       	or	r24, r25
+ 248:	8d b9       	out	0x0d, r24	; 13
+		/* Selecting the SCK clock polarity of the device */
+		ASSIGN_BIT(SPCR_R, SPI_CPOL_BIT, enuSPIClockPolarity);
+ 24a:	2d b1       	in	r18, 0x0d	; 13
+ 24c:	81 2f       	mov	r24, r17
+ 24e:	90 e0       	ldi	r25, 0x00	; 0
+ 250:	88 0f       	add	r24, r24
+ 252:	99 1f       	adc	r25, r25
+ 254:	88 0f       	add	r24, r24
+ 256:	99 1f       	adc	r25, r25
+ 258:	88 0f       	add	r24, r24
+ 25a:	99 1f       	adc	r25, r25
+ 25c:	92 2f       	mov	r25, r18
+ 25e:	97 7f       	andi	r25, 0xF7	; 247
+ 260:	89 2b       	or	r24, r25
+ 262:	8d b9       	out	0x0d, r24	; 13
+		/* Selecting the data order of the data word, whether it is MSB first or LSB first */
+		ASSIGN_BIT(SPCR_R, SPI_DORD_BIT, enuSPIDataOrder);
+ 264:	8d b1       	in	r24, 0x0d	; 13
+ 266:	90 e2       	ldi	r25, 0x20	; 32
+ 268:	09 9f       	mul	r16, r25
+ 26a:	80 01       	movw	r16, r0
+ 26c:	11 24       	eor	r1, r1
+ 26e:	8f 7d       	andi	r24, 0xDF	; 223
+ 270:	08 2b       	or	r16, r24
+ 272:	0d b9       	out	0x0d, r16	; 13
+		/* Starting the SPI module */
+		SET_BIT(SPCR_R, SPI_SPE_BIT);
+ 274:	8d b1       	in	r24, 0x0d	; 13
+ 276:	80 64       	ori	r24, 0x40	; 64
+ 278:	8d b9       	out	0x0d, r24	; 13
+		enuSPIState = SPI_INIT_DONE;
+ 27a:	81 e0       	ldi	r24, 0x01	; 1
+ 27c:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <enuSPIState>
+		enuRetVar = E_OK;
+ 280:	09 c0       	rjmp	.+18     	; 0x294 <SPI_Init+0x118>
+	}
+	else
+	{
+		enuRetVar = E_ERROR;
+ 282:	80 e0       	ldi	r24, 0x00	; 0
+ 284:	07 c0       	rjmp	.+14     	; 0x294 <SPI_Init+0x118>
+ 286:	80 e0       	ldi	r24, 0x00	; 0
+ 288:	05 c0       	rjmp	.+10     	; 0x294 <SPI_Init+0x118>
+ 28a:	80 e0       	ldi	r24, 0x00	; 0
+ 28c:	03 c0       	rjmp	.+6      	; 0x294 <SPI_Init+0x118>
+ 28e:	80 e0       	ldi	r24, 0x00	; 0
+ 290:	01 c0       	rjmp	.+2      	; 0x294 <SPI_Init+0x118>
+ 292:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	return enuRetVar;
+}
+ 294:	df 91       	pop	r29
+ 296:	cf 91       	pop	r28
+ 298:	1f 91       	pop	r17
+ 29a:	0f 91       	pop	r16
+ 29c:	ff 90       	pop	r15
+ 29e:	08 95       	ret
+
+000002a0 <SPI_SendChar>:
+*************************************************************************************************/
+enuErrorStatus_t SPI_SendChar(uint8_t u8Data)
+{
+	enuErrorStatus_t enuRetVar;
+	
+	if(enuSPIState == SPI_INIT_DONE)
+ 2a0:	90 91 84 00 	lds	r25, 0x0084	; 0x800084 <enuSPIState>
+ 2a4:	91 30       	cpi	r25, 0x01	; 1
+ 2a6:	29 f4       	brne	.+10     	; 0x2b2 <SPI_SendChar+0x12>
+	{
+		/* Adding the value of the data to be transmitted inside the SPI data register */
+		SPDR_R = u8Data;
+ 2a8:	8f b9       	out	0x0f, r24	; 15
+		/* Waiting for the data until it has successfully been transmitted */
+		while(IS_BIT_CLEAR(SPSR_R, SPI_SPIF_BIT));
+ 2aa:	77 9b       	sbis	0x0e, 7	; 14
+ 2ac:	fe cf       	rjmp	.-4      	; 0x2aa <SPI_SendChar+0xa>
+		enuRetVar = E_OK;
+ 2ae:	81 e0       	ldi	r24, 0x01	; 1
+ 2b0:	08 95       	ret
+	}
+	else
+	{
+		enuRetVar = E_ERROR;
+ 2b2:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	return enuRetVar;
+}
+ 2b4:	08 95       	ret
+
+000002b6 <_exit>:
+ 2b6:	f8 94       	cli
+
+000002b8 <__stop_program>:
+ 2b8:	ff cf       	rjmp	.-2      	; 0x2b8 <__stop_program>
