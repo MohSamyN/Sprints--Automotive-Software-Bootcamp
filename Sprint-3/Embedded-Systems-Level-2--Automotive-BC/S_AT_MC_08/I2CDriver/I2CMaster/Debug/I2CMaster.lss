@@ -1,0 +1,306 @@
+
+I2CMaster.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000180  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  000001f4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000001  00800060  00800060  000001f4  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000001f4  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000224  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000078  00000000  00000000  00000260  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000b62  00000000  00000000  000002d8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000060d  00000000  00000000  00000e3a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000003e6  00000000  00000000  00001447  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000000c8  00000000  00000000  00001830  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000a0b  00000000  00000000  000018f8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000314  00000000  00000000  00002303  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000058  00000000  00000000  00002617  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   8:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  24:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  28:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  2c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  34:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  38:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  3c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  40:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a1 36       	cpi	r26, 0x61	; 97
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 3e 00 	call	0x7c	; 0x7c <main>
+  74:	0c 94 be 00 	jmp	0x17c	; 0x17c <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <main>:
+#include "TWI.h"
+
+
+int main(void)
+{
+  7c:	cf 93       	push	r28
+  7e:	df 93       	push	r29
+  80:	1f 92       	push	r1
+  82:	cd b7       	in	r28, 0x3d	; 61
+  84:	de b7       	in	r29, 0x3e	; 62
+   enuTWIStatus_t enuTWIStatus;
+	
+	TWI_MasterInit(71, TWI_FOSC_OVER_64);
+  86:	63 e0       	ldi	r22, 0x03	; 3
+  88:	87 e4       	ldi	r24, 0x47	; 71
+  8a:	0e 94 67 00 	call	0xce	; 0xce <TWI_MasterInit>
+	// Master Write
+	TWI_Start();
+  8e:	0e 94 9b 00 	call	0x136	; 0x136 <TWI_Start>
+	TWI_CheckStatus(&enuTWIStatus);
+  92:	ce 01       	movw	r24, r28
+  94:	01 96       	adiw	r24, 0x01	; 1
+  96:	0e 94 8f 00 	call	0x11e	; 0x11e <TWI_CheckStatus>
+	if(enuTWIStatus == TWI_MASTER_START_CONDITION_CODE)
+  9a:	89 81       	ldd	r24, Y+1	; 0x01
+  9c:	88 30       	cpi	r24, 0x08	; 8
+  9e:	b1 f4       	brne	.+44     	; 0xcc <main+0x50>
+	{
+		TWI_Write(0xA0);	
+  a0:	80 ea       	ldi	r24, 0xA0	; 160
+  a2:	0e 94 7d 00 	call	0xfa	; 0xfa <TWI_Write>
+		TWI_CheckStatus(&enuTWIStatus);
+  a6:	ce 01       	movw	r24, r28
+  a8:	01 96       	adiw	r24, 0x01	; 1
+  aa:	0e 94 8f 00 	call	0x11e	; 0x11e <TWI_CheckStatus>
+		if(enuTWIStatus == TWI_MASTER_SLA_W_ACK_CONDITION_CODE)
+  ae:	89 81       	ldd	r24, Y+1	; 0x01
+  b0:	88 31       	cpi	r24, 0x18	; 24
+  b2:	61 f4       	brne	.+24     	; 0xcc <main+0x50>
+		{
+			TWI_Write((uint8_t)'A');
+  b4:	81 e4       	ldi	r24, 0x41	; 65
+  b6:	0e 94 7d 00 	call	0xfa	; 0xfa <TWI_Write>
+			TWI_CheckStatus(&enuTWIStatus);
+  ba:	ce 01       	movw	r24, r28
+  bc:	01 96       	adiw	r24, 0x01	; 1
+  be:	0e 94 8f 00 	call	0x11e	; 0x11e <TWI_CheckStatus>
+			if(enuTWIStatus == TWI_MASTER_DATA_W_ACK_CONDITION_CODE)
+  c2:	89 81       	ldd	r24, Y+1	; 0x01
+  c4:	88 32       	cpi	r24, 0x28	; 40
+  c6:	11 f4       	brne	.+4      	; 0xcc <main+0x50>
+			{
+				TWI_Stop();
+  c8:	0e 94 ad 00 	call	0x15a	; 0x15a <TWI_Stop>
+  cc:	ff cf       	rjmp	.-2      	; 0xcc <main+0x50>
+
+000000ce <TWI_MasterInit>:
+	else
+	{
+		enuRetVar = E_ERROR;
+	}
+	return enuRetVar;
+}
+  ce:	96 ef       	ldi	r25, 0xF6	; 246
+  d0:	98 0f       	add	r25, r24
+  d2:	96 37       	cpi	r25, 0x76	; 118
+  d4:	70 f4       	brcc	.+28     	; 0xf2 <TWI_MasterInit+0x24>
+  d6:	64 30       	cpi	r22, 0x04	; 4
+  d8:	70 f4       	brcc	.+28     	; 0xf6 <TWI_MasterInit+0x28>
+  da:	80 b9       	out	0x00, r24	; 0
+  dc:	81 b1       	in	r24, 0x01	; 1
+  de:	8c 7f       	andi	r24, 0xFC	; 252
+  e0:	68 2b       	or	r22, r24
+  e2:	61 b9       	out	0x01, r22	; 1
+  e4:	86 b7       	in	r24, 0x36	; 54
+  e6:	84 60       	ori	r24, 0x04	; 4
+  e8:	86 bf       	out	0x36, r24	; 54
+  ea:	81 e0       	ldi	r24, 0x01	; 1
+  ec:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+  f0:	08 95       	ret
+  f2:	80 e0       	ldi	r24, 0x00	; 0
+  f4:	08 95       	ret
+  f6:	80 e0       	ldi	r24, 0x00	; 0
+  f8:	08 95       	ret
+
+000000fa <TWI_Write>:
+  fa:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  fe:	91 30       	cpi	r25, 0x01	; 1
+ 100:	61 f4       	brne	.+24     	; 0x11a <TWI_Write+0x20>
+ 102:	83 b9       	out	0x03, r24	; 3
+ 104:	86 b7       	in	r24, 0x36	; 54
+ 106:	80 68       	ori	r24, 0x80	; 128
+ 108:	86 bf       	out	0x36, r24	; 54
+ 10a:	86 b7       	in	r24, 0x36	; 54
+ 10c:	84 60       	ori	r24, 0x04	; 4
+ 10e:	86 bf       	out	0x36, r24	; 54
+ 110:	06 b6       	in	r0, 0x36	; 54
+ 112:	07 fe       	sbrs	r0, 7
+ 114:	fd cf       	rjmp	.-6      	; 0x110 <TWI_Write+0x16>
+ 116:	81 e0       	ldi	r24, 0x01	; 1
+ 118:	08 95       	ret
+ 11a:	80 e0       	ldi	r24, 0x00	; 0
+ 11c:	08 95       	ret
+
+0000011e <TWI_CheckStatus>:
+* Parameters	: penuTWIStatus
+* Return Value	: enuErrorStatus_t
+* Description  : Check the current status of the TWI module
+*************************************************************************************************/
+enuErrorStatus_t TWI_CheckStatus(enuTWIStatus_t* penuTWIStatus)
+{
+ 11e:	fc 01       	movw	r30, r24
+	enuErrorStatus_t enuRetVar;
+
+	if(enuTWIGroupState == TWI_INIT_DONE)
+ 120:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 124:	91 30       	cpi	r25, 0x01	; 1
+ 126:	29 f4       	brne	.+10     	; 0x132 <TWI_CheckStatus+0x14>
+	{
+		/* Checking the current status of the TWI module */
+		*penuTWIStatus = TWI_GET_STATUS(TWSR_R);
+ 128:	91 b1       	in	r25, 0x01	; 1
+ 12a:	98 7f       	andi	r25, 0xF8	; 248
+ 12c:	90 83       	st	Z, r25
+		enuRetVar = E_OK;		
+ 12e:	81 e0       	ldi	r24, 0x01	; 1
+ 130:	08 95       	ret
+	}
+	else
+	{
+		enuRetVar = E_ERROR;
+ 132:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	return enuRetVar;
+}
+ 134:	08 95       	ret
+
+00000136 <TWI_Start>:
+*************************************************************************************************/
+enuErrorStatus_t TWI_Start(void)
+{
+	enuErrorStatus_t enuRetVar;
+
+	if(enuTWIGroupState == TWI_INIT_DONE)
+ 136:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 13a:	81 30       	cpi	r24, 0x01	; 1
+ 13c:	61 f4       	brne	.+24     	; 0x156 <TWI_Start+0x20>
+	{
+		/* Clearing the TWI interrupt flag */
+		SET_BIT(TWCR_R, TWI_INT_FLAG_BIT);
+ 13e:	86 b7       	in	r24, 0x36	; 54
+ 140:	80 68       	ori	r24, 0x80	; 128
+ 142:	86 bf       	out	0x36, r24	; 54
+		/* Initiating the transmission operation by a START condition bit */
+		SET_BIT(TWCR_R, TWI_START_CONDITION_BIT);
+ 144:	86 b7       	in	r24, 0x36	; 54
+ 146:	80 62       	ori	r24, 0x20	; 32
+ 148:	86 bf       	out	0x36, r24	; 54
+		/* Enabling the TWI module */
+		SET_BIT(TWCR_R, TWI_EN_BIT);
+ 14a:	86 b7       	in	r24, 0x36	; 54
+ 14c:	84 60       	ori	r24, 0x04	; 4
+ 14e:	86 bf       	out	0x36, r24	; 54
+		/* Waiting for the start bit to be transmitted */
+		while(IS_BIT_CLEAR(TWCR_R, TWI_INT_FLAG_BIT));
+ 150:	06 b6       	in	r0, 0x36	; 54
+ 152:	07 fe       	sbrs	r0, 7
+ 154:	fd cf       	rjmp	.-6      	; 0x150 <TWI_Start+0x1a>
+	else
+	{
+		enuRetVar = E_ERROR;
+	}
+	return enuRetVar;
+}
+ 156:	80 e0       	ldi	r24, 0x00	; 0
+ 158:	08 95       	ret
+
+0000015a <TWI_Stop>:
+*************************************************************************************************/
+enuErrorStatus_t TWI_Stop(void)
+{
+	enuErrorStatus_t enuRetVar;
+
+	if(enuTWIGroupState == TWI_INIT_DONE)
+ 15a:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 15e:	81 30       	cpi	r24, 0x01	; 1
+ 160:	59 f4       	brne	.+22     	; 0x178 <TWI_Stop+0x1e>
+	{
+		/* Clearing the TWI interrupt flag */
+		SET_BIT(TWCR_R, TWI_INT_FLAG_BIT);
+ 162:	86 b7       	in	r24, 0x36	; 54
+ 164:	80 68       	ori	r24, 0x80	; 128
+ 166:	86 bf       	out	0x36, r24	; 54
+		/* Enabling the TWI module */
+		SET_BIT(TWCR_R, TWI_EN_BIT);
+ 168:	86 b7       	in	r24, 0x36	; 54
+ 16a:	84 60       	ori	r24, 0x04	; 4
+ 16c:	86 bf       	out	0x36, r24	; 54
+		/* Terminating the transmission operation by a STOP condition bit */
+		SET_BIT(TWCR_R, TWI_STOP_CONDITION_BIT);
+ 16e:	86 b7       	in	r24, 0x36	; 54
+ 170:	80 61       	ori	r24, 0x10	; 16
+ 172:	86 bf       	out	0x36, r24	; 54
+		enuRetVar = E_OK;
+ 174:	81 e0       	ldi	r24, 0x01	; 1
+ 176:	08 95       	ret
+	}
+	else
+	{
+		enuRetVar = E_ERROR;
+ 178:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	return enuRetVar;
+}
+ 17a:	08 95       	ret
+
+0000017c <_exit>:
+ 17c:	f8 94       	cli
+
+0000017e <__stop_program>:
+ 17e:	ff cf       	rjmp	.-2      	; 0x17e <__stop_program>
