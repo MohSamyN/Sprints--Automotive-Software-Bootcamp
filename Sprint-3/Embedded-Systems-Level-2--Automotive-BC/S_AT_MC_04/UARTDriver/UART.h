@@ -15,7 +15,7 @@ typedef enum {UART_FIVE_CHARACTER_BITS, UART_SIX_CHARACTER_BITS, UART_SEVEN_CHAR
 * Return Value	: enuErrorStatus_t
 * Description  : Initialize UART module according to the configuration
 *************************************************************************************************/
-enuErrorStatus_t UART_Init(uint32_t u32UARTBaudrate, enuUARTCharacterSize_t enuUARTCharacterSize, enuUARTStopBitSelect_t enuUARTStopBitSelect, enuUARTParityMode_t enuUARTParityModed);
+enuErrorStatus_t UART_Init(uint32_t u32UARTBaudrate, enuUARTCharacterSize_t enuUARTCharacterSize, enuUARTStopBitSelect_t enuUARTStopBitSelect, enuUARTParityMode_t enuUARTParityMode);
 /*************************************************************************************************
 * Parameters	: u16Data
 * Return Value	: enuErrorStatus_t
