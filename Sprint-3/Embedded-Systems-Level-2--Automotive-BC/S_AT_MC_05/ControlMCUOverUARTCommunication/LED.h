@@ -29,7 +29,6 @@ enuErrorStatus_t LED_Off(enuDIOPinNo_t enuDIOPinNo);
 * Return Value	: enuErrorStatus_t
 * Description  : Toggle the state of the required LED
 *************************************************************************************************/
-/* A function to toggle the state of the required LED */
 enuErrorStatus_t LED_Toggle(enuDIOPinNo_t enuDIOPinNo);
 
 #endif /* LED_H_ */
