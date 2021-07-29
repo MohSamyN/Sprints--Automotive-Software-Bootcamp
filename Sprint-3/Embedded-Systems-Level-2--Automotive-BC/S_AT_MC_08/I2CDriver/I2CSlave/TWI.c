@@ -31,8 +31,8 @@ typedef volatile uint8_t* const pu8TWIRegisterAddress;
 #define TWI_TWEA_BIT											6u
 #define TWI_GET_STATUS(REG)								(REG & 0xF8)
 
-typedef enum {TWI_INIT_UNDONE, TWI_INIT_DONE} enuTWIState_t;
-static enuTWIState_t enuTWIState = TWI_INIT_UNDONE;
+typedef enum {TWI_MASTER_INIT_UNDONE, TWI_MASTER_INIT_DONE, TWI_SLAVE_INIT_UNDONE, TWI_SLAVE_INIT_DONE} enuTWIState_t;
+static enuTWIState_t enuTWIState;
 
 
 /*************************************************************************************************
@@ -53,11 +53,12 @@ enuErrorStatus_t TWI_MasterInit(uint8_t u8TWIBitRate, enuTWIPrescalerSelect_t en
 		ASSIGN_BITS(TWSR_R, TWI_PRESCALER_SELECT_START_BIT,  enuTWIPrescalerSelect, TWI_PRESCALER_SELECT_MASK);
 		/* Enabling the TWI module */
 		SET_BIT(TWCR_R, TWI_EN_BIT);
-		enuTWIState = TWI_INIT_DONE;
+		enuTWIState = TWI_MASTER_INIT_DONE;
 		enuRetVar = E_OK;
 	}
 	else
 	{
+		enuTWIState = TWI_MASTER_INIT_UNDONE;
 		enuRetVar = E_ERROR;
 	}
 	return enuRetVar;	
@@ -85,11 +86,12 @@ enuErrorStatus_t TWI_SlaveInit(uint8_t u8TWISlaveAddress, enuTWIGeneralCallRecog
 		ASSIGN_BIT(TWCR_R, TWI_TWEA_BIT, enuTWIEnableAcknowledgeBit);
 		/* Enabling the TWI module */
 		SET_BIT(TWCR_R, TWI_EN_BIT);
-		enuTWIState = TWI_INIT_DONE;
+		enuTWIState = TWI_SLAVE_INIT_DONE;
 		enuRetVar = E_OK;
 	}
 	else
 	{
+		enuTWIState = TWI_SLAVE_INIT_UNDONE;
 		enuRetVar = E_ERROR;
 	}
 	return enuRetVar;	
@@ -104,7 +106,7 @@ enuErrorStatus_t TWI_Write(uint8_t u8Data)
 {
 	enuErrorStatus_t enuRetVar;
 
-	if(enuTWIState == TWI_INIT_DONE)
+	if((enuTWIState == TWI_MASTER_INIT_DONE) || (enuTWIState == TWI_SLAVE_INIT_DONE))
 	{
 		/* Loading the input data byte into the data register */
 		TWDR_R = u8Data;
@@ -134,7 +136,7 @@ enuErrorStatus_t TWI_Read(uint8_t* pu8Data)
 {
 	enuErrorStatus_t enuRetVar;
 
-	if(enuTWIState == TWI_INIT_DONE)
+	if((enuTWIState == TWI_MASTER_INIT_DONE) || (enuTWIState == TWI_SLAVE_INIT_DONE))
 	{
 		/* Clearing the TWI interrupt flag */
 		SET_BIT(TWCR_R, TWI_INT_FLAG_BIT);
@@ -162,7 +164,7 @@ enuErrorStatus_t TWI_CheckStatus(enuTWIStatus_t* penuTWIStatus)
 {
 	enuErrorStatus_t enuRetVar;
 
-	if(enuTWIState == TWI_INIT_DONE)
+	if((enuTWIState == TWI_MASTER_INIT_DONE) || (enuTWIState == TWI_SLAVE_INIT_DONE))
 	{
 		/* Checking the current status of the TWI module */
 		*penuTWIStatus = TWI_GET_STATUS(TWSR_R);
@@ -184,7 +186,7 @@ enuErrorStatus_t TWI_Start(void)
 {
 	enuErrorStatus_t enuRetVar;
 
-	if(enuTWIState == TWI_INIT_DONE)
+	if(enuTWIState == TWI_MASTER_INIT_DONE)
 	{
 		/* Initiating the transmission operation by a START condition bit */
 		SET_BIT(TWCR_R, TWI_START_CONDITION_BIT);
@@ -211,7 +213,7 @@ enuErrorStatus_t TWI_Stop(void)
 {
 	enuErrorStatus_t enuRetVar;
 
-	if(enuTWIState == TWI_INIT_DONE)
+	if(enuTWIState == TWI_MASTER_INIT_DONE)
 	{
 		/* Clearing the TWI interrupt flag */
 		SET_BIT(TWCR_R, TWI_INT_FLAG_BIT);
@@ -237,7 +239,7 @@ enuErrorStatus_t TWI_Listen(void)
 {
 	enuErrorStatus_t enuRetVar;
 
-	if(enuTWIState == TWI_INIT_DONE)
+	if(enuTWIState == TWI_SLAVE_INIT_DONE)
 	{
 		/* Waiting for the module to be addressed */
 		while(IS_BIT_CLEAR(TWCR_R, TWI_INT_FLAG_BIT));		
