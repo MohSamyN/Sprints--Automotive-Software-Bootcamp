@@ -4,8 +4,6 @@
 /* Internal Macros */
 #define KEYPAD_TYPE_MIN_VALUE																-1l
 #define KEYPAD_TYPE_MAX_VALUE																2u
-#define KEYPAD_COLUMNS_MODE_MIN_VALUE													-1l
-#define KEYPAD_COLUMNS_MODE_MAX_VALUE													2u
 #define KEYPAD_CALCULATE_CORRESPONDING_KEY_VALUE(COL_INDEX, ROW_INDEX)		(COL_INDEX + (3 * (ROW_INDEX - 1)))
 #define KEYPAD_ROWS_NUMBER																	4u
 #define KEYPAD_COLS_NUMBER																	4u
