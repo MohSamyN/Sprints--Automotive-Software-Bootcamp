@@ -38,7 +38,7 @@ void ButtonClient_Init(enuDIOPinNo_t enuDIOPinNo, enuButtonConnectionType_t enuB
 	}
 	else if(enuTimerSelect == TIMER1)
 	{
-		Timer1_OVF_InterruptEnable();
+		T1_OV_InterruptEnable();
 	}
 	else
 	{
@@ -68,9 +68,7 @@ void ButtonClient_EventReceive(enuDIOPinNo_t enuDIOPinNo, void (*pfButtonClient_
 		}
 		else if(genuTimerSelect == TIMER1)
 		{
-			/**/
-			/* Start timer 1 */
-			/**/
+			T1_Start(BUTTONCLIENT_TIMER_DELAY_VALUE, ButtonClient_Callback);
 		}
 		else
 		{
